@@ -12,7 +12,7 @@ endif()
 project ("ABfinalProgramacionAplicada")
 
 # Agregue un origen al ejecutable de este proyecto.
-add_executable (ABfinalProgramacionAplicada "ABfinalProgramacionAplicada.cpp" "ABfinalProgramacionAplicada.h")
+add_executable (ABfinalProgramacionAplicada "ABfinalProgramacionAplicada.cpp" "ABfinalProgramacionAplicada.h" "Persona.cpp" "Empleado.cpp" "Cliente.cpp" "Cita.cpp" "Quejas.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ABfinalProgramacionAplicada PROPERTY CXX_STANDARD 20)
