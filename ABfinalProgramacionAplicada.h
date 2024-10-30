@@ -4,5 +4,6 @@
 #pragma once
 
 #include <iostream>
-
+#include <string>
+using namespace std;
 // TODO: Haga referencia aquí a los encabezados adicionales que el programa requiere.
