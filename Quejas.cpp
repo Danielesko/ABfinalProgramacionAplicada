@@ -43,3 +43,4 @@ public:
 	void setDescripcion(string descripcion) {
 		this->descripcion = descripcion;
 	}
+};
