@@ -13,3 +13,5 @@ using json = nlohmann::json;
 #include "Cliente.h"
 
 // TODO: Haga referencia aquí a los encabezados adicionales que el programa requiere.
+void crearCliente();
+void escribirClienteArchivo(json cliente);

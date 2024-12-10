@@ -9,10 +9,10 @@ public:
     std::string nombre;    
     std::string apellido;  
     std::string dni;       
-    int tlf;               
+    string tlf;               
 
 public:
-    Persona(int id, std::string nombre, std::string apellido, std::string dni, int tlf)
+    Persona(int id, std::string nombre, std::string apellido, std::string dni, string tlf)
         : id(id), nombre(nombre), apellido(apellido), dni(dni), tlf(tlf) {
     }
 
@@ -20,7 +20,7 @@ public:
     std::string getNombre() const { return nombre; }
     std::string getApellido() const { return apellido; }
     std::string getDni() const { return dni; }
-    int getTlf() const { return tlf; }
+    string getTlf() const { return tlf; }
 };
 
 #endif  
