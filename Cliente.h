@@ -40,4 +40,5 @@ public:
 
 void escribirClienteArchivo(json cliente);
 void crearCliente();
+void mostrarPacientes();
 #endif  

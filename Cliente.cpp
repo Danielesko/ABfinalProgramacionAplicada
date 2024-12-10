@@ -2,10 +2,10 @@
 #include "Persona.h"
 
 void escribirClienteArchivo(json cliente) {
-	ofstream outputFile("clientes.json");
-	if (outputFile.is_open()) {
-		outputFile << cliente.dump(4);
-		outputFile.close();
+	ofstream archivo("clientes.json");
+	if (archivo.is_open()) {
+		archivo << cliente.dump(4);
+		archivo.close();
 		cout << "Cliente guardado correctamente." << endl;
 	}
 	else {
@@ -37,4 +37,16 @@ void crearCliente() {
     getline(cin, localidad);
 	Cliente cliente = Cliente(id, nombre, apellido, dni, tlf, fechaNac, localidad);
 	escribirClienteArchivo(cliente.to_json());
+}
+void mostrarPacientes() {
+	ifstream archivo;
+	archivo.open("clientes.json");
+	if (archivo.is_open()) {
+		json data = json::parse(archivo);
+		cout << data.dump(4) << endl;
+		/*string data = jsonToString(data);
+		cout << data << endl;*/
+	}else {
+		cout << "No se pudo abrir el archivo para leer." << endl;
+	}
 }

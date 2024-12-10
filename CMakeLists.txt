@@ -9,9 +9,11 @@ add_executable(ABfinalProgramacionAplicada
     ABfinalProgramacionAplicada.cpp
     Persona.cpp
     Empleado.cpp
-    Cliente.cpp  # Asegúrate de que este archivo está aquí
+    Cliente.cpp  
     Cita.cpp
     Quejas.cpp
+    Funciones.h
+    Funciones.cpp
 )
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
