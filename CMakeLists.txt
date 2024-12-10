@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 # Agregue un origen al ejecutable de este proyecto.
-add_executable (ABfinalProgramacionAplicada "ABfinalProgramacionAplicada.cpp" "ABfinalProgramacionAplicada.h" "Persona.cpp" "Empleado.cpp" "Cliente.cpp" "Cita.cpp" "Quejas.cpp"   "Persona.h")
+add_executable (ABfinalProgramacionAplicada "ABfinalProgramacionAplicada.cpp" "ABfinalProgramacionAplicada.h" "Persona.cpp" "Empleado.cpp" "Cliente.cpp" "Cita.cpp" "Quejas.cpp"   "Persona.h" "Cliente.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ABfinalProgramacionAplicada PROPERTY CXX_STANDARD 20)

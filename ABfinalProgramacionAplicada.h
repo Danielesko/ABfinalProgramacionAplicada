@@ -9,7 +9,7 @@ using namespace std;
 #include <fstream>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
-
-void abrirArchivo(string nombreArchivo);
+#include "Persona.h"
+#include "Cliente.h"
 
 // TODO: Haga referencia aquí a los encabezados adicionales que el programa requiere.

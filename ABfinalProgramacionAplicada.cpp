@@ -7,7 +7,7 @@ int main()
 {
 	cout << "Hello CMake." << endl;
 	cout << "Bienvenido a la aplicación" << endl;
-	do {
+	/*do {
 		int num;
 		cout << "Seleccione una opción" << endl;
 		cout << "Clientes" << endl;
@@ -22,6 +22,8 @@ int main()
 		cout << "4. Modificar un cliente" << endl;
 		cout << "5. Eliminar un cliente" << endl;
 
-	} while (num != 0);
+	} while (num != 0);*/
+	Cliente cliente = Cliente();
+	cliente.crearCliente();
 	return 0;
 }
