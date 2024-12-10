@@ -10,7 +10,7 @@ int main()
 	cout << "Bienvenido a la aplicación" << endl;
 	do {
 		cout << "Seleccione una opción" << endl;
-		cout << "1 Clientes" << endl;
+		cout << "1 Pacientes" << endl;
 		cout << "2 Empleados" << endl;
 		cout << "3 Quejas" << endl;
 		cout << "4 Citas" << endl;
@@ -19,26 +19,24 @@ int main()
 		switch (num)
 		{
 		case 1:
-			crearCliente();
+			menuPacientes();
 			break;
 		case 2:
+			menuEmpleados();
 			break;
 		case 3:
+			menuQuejas();
 			break;
 		case 4:
+			menuCitas();
 			break;
 		case 0:
+			cout << "¡Adiós!." << endl;
 			break;
 		default:
 			cout << "Opción no válida" << endl;
 			break;
 		}
-		cout << "1. Ingresar un nuevo cliente" << endl;
-		cout << "2. Mostrar todos los clientes" << endl;
-		cout << "3. Buscar un cliente" << endl;
-		cout << "4. Modificar un cliente" << endl;
-		cout << "5. Eliminar un cliente" << endl;
-
 	} while (num != 0);
 	crearCliente();
 	return 0;

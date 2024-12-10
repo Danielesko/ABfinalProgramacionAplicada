@@ -15,3 +15,7 @@ using json = nlohmann::json;
 // TODO: Haga referencia aquí a los encabezados adicionales que el programa requiere.
 void crearCliente();
 void escribirClienteArchivo(json cliente);
+void menuPacientes();
+void menuEmpleados();
+void menuQuejas();
+void menuCitas();
