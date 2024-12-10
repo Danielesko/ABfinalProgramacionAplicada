@@ -1,5 +1,6 @@
 #include "ABfinalProgramacionAplicada.h"
 class Persona {
+public:
 	int id;
 	string nombre;
 	string apellido;
