@@ -16,5 +16,5 @@ void menuCitas();
 string jsonToString(json clientesJson);
 
 void crearCliente();
-
+string leerCadenaNoVacia(const string &mensaje);
 #endif 

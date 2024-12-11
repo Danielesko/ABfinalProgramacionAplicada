@@ -1,13 +1,6 @@
 #include "ABfinalProgramacionAplicada.h"
 #include "Persona.h"
-string leerCadenaNoVacia(const string& mensaje) {
-	string entrada;
-	cout << mensaje;
-	while (getline(cin, entrada), entrada.empty()) {
-		cout << "El campo no puede estar vacío. " << mensaje;
-	}
-	return entrada;
-}
+#include "Funciones.h"
 void escribirClienteArchivo(json cliente) {
 	json clientesExistentes;
 	ifstream archivoLeer("clientes.json");
@@ -63,11 +56,6 @@ void mostrarPacientes() {
 			cout << "No hay pacientes registrados." << endl;
 		}
 		else if (datos.is_array()) {
-			for (int i = 0; i < datos.size(); i++) {
-				cout << datos.dump(4) << endl;
-			}
-		}
-		else {
 			cout << datos.dump(4) << endl;
 		}
 	}else {

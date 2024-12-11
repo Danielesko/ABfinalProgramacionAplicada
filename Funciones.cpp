@@ -62,3 +62,11 @@ string jsonToString(json clientesJson) {
 	}
 	return pacientes;
 }
+string leerCadenaNoVacia(const string &mensaje) {
+	string entrada;
+	cout << mensaje;
+	while (getline(cin, entrada), entrada.empty()) {
+		cout << "El campo no puede estar vacío. " << mensaje;
+	}
+	return entrada;
+}
