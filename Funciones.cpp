@@ -67,6 +67,7 @@ string jsonToString(json clientesJson) {
 string leerCadenaNoVacia(const string &mensaje) {
 	string entrada;
 	cout << mensaje;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	while (getline(cin, entrada), entrada.empty()) {
 		cout << "El campo no puede estar vacío. " << mensaje;
 	}
