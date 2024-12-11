@@ -11,6 +11,7 @@ void menuPacientes() {
 		cout << "5. Eliminar un paciente" << endl;
 		cout << "0. Salir" << endl;
 		cin >> num;
+		string nombre;
 		switch (num) {
 		case 1:
 			crearCliente();
@@ -19,7 +20,8 @@ void menuPacientes() {
 			mostrarPacientes();
 			break;
 		case 3:
-			//buscarCliente();
+			nombre = leerCadenaNoVacia("Ingrese el nombre del paciente: ");
+			buscarPaciente(nombre);
 			break;	
 		case 4:
 			//modificarCliente();
