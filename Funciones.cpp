@@ -11,6 +11,11 @@ void menuPacientes() {
 		cout << "5. Eliminar un paciente" << endl;
 		cout << "0. Salir" << endl;
 		cin >> num;
+		while (!(cin >> num)) {
+			cin.clear(); 
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+			cout << "Por favor, ingrese un número válido: ";
+		}
 		string nombre;
 		switch (num) {
 		case 1:
