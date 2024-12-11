@@ -2,7 +2,18 @@
 #include "Persona.h"
 
 void escribirClienteArchivo(json cliente) {
-	ofstream archivo("clientes.json");
+	ofstream archivo("clientes.json", ios::app);
+	ifstream archivoLeer("clientes.json");
+	json clientesExistentes;
+	if (archivoLeer.is_open()) {
+		archivoLeer >> clientesExistentes;
+		clientesExistentes = json::array();
+		archivoLeer.close();
+	}
+	else {
+		clientesExistentes = json::array();
+	}
+	clientesExistentes.push_back(cliente);
 	if (archivo.is_open()) {
 		archivo << cliente.dump(4);
 		archivo.close();
@@ -40,12 +51,21 @@ void crearCliente() {
 }
 void mostrarPacientes() {
 	ifstream archivo;
+	json datos;
 	archivo.open("clientes.json");
 	if (archivo.is_open()) {
-		json data = json::parse(archivo);
-		cout << data.dump(4) << endl;
-		/*string data = jsonToString(data);
-		cout << data << endl;*/
+		archivo >> datos;
+		if (datos.size() == 0) {
+			cout << "No hay pacientes registrados." << endl;
+		}
+		else if (datos.is_array()) {
+			for (int i = 0; i < datos.size(); i++) {
+				cout << datos.dump(4) << endl;
+			}
+		}
+		else {
+			cout << datos.dump(4) << endl;
+		}
 	}else {
 		cout << "No se pudo abrir el archivo para leer." << endl;
 	}
