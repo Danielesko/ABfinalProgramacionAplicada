@@ -1,51 +1,55 @@
 #include "ABfinalProgramacionAplicada.h"
 #include "Persona.h"
-
-void escribirClienteArchivo(json cliente) {
-	ofstream archivo("clientes.json", ios::app);
-	ifstream archivoLeer("clientes.json");
-	json clientesExistentes;
-	if (archivoLeer.is_open()) {
-		archivoLeer >> clientesExistentes;
-		clientesExistentes = json::array();
-		archivoLeer.close();
+string leerCadenaNoVacia(const string& mensaje) {
+	string entrada;
+	cout << mensaje;
+	while (getline(cin, entrada), entrada.empty()) {
+		cout << "El campo no puede estar vacío. " << mensaje;
 	}
-	else {
-		clientesExistentes = json::array();
+	return entrada;
+}
+void escribirClienteArchivo(json cliente) {
+	json clientesExistentes;
+	ifstream archivoLeer("clientes.json");
+
+	if (archivoLeer.is_open() && archivoLeer.peek() != ifstream::traits_type::eof()) {
+		archivoLeer >> clientesExistentes;
+		if (!clientesExistentes.is_array()) {
+			cout << "El archivo no contiene un array válido. Se sobrescribirá con un array nuevo." << endl;
+			clientesExistentes = json::array();
+		}
+		archivoLeer.close();
+	}else {
+		clientesExistentes = json::array(); 
 	}
 	clientesExistentes.push_back(cliente);
-	if (archivo.is_open()) {
-		archivo << cliente.dump(4);
-		archivo.close();
+
+	ofstream archivoEscribir("clientes.json", ios::trunc); 
+	if (archivoEscribir.is_open()) {
+		archivoEscribir << clientesExistentes.dump(4); 
+		archivoEscribir.close();
 		cout << "Cliente guardado correctamente." << endl;
 	}
 	else {
 		cout << "No se pudo abrir el archivo para guardar." << endl;
 	}
 }
+
 void crearCliente() {
 	int id;
-	string nombre;
-	string apellido;
-	string dni;
-	string tlf;
-	string fechaNac;
-	string localidad;
     cout << "Ingrese el id del cliente: ";
-    cin >> id;
+    while (!(cin >> id)) {
+        cout << "ID inválido. Ingrese un número entero: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Ingrese el nombre del cliente: ";
-    getline(cin, nombre);
-    cout << "Ingrese el apellido del cliente: ";
-    getline(cin, apellido);
-    cout << "Ingrese el dni del cliente: ";
-    getline(cin, dni);
-    cout << "Ingrese el telefono del cliente: ";
-    getline(cin, tlf);
-    cout << "Ingrese la fecha de nacimiento del cliente: ";
-    getline(cin, fechaNac);
-    cout << "Ingrese la localidad del cliente: ";
-    getline(cin, localidad);
+	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
+	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
+	string dni = leerCadenaNoVacia("Ingrese el DNI del cliente: ");
+	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
+	string fechaNac = leerCadenaNoVacia("Ingrese la fecha de nacimiento del cliente: ");
+	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
 	Cliente cliente = Cliente(id, nombre, apellido, dni, tlf, fechaNac, localidad);
 	escribirClienteArchivo(cliente.to_json());
 }
