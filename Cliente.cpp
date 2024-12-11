@@ -56,7 +56,8 @@ void mostrarPacientes() {
 			cout << "No hay pacientes registrados." << endl;
 		}
 		else if (datos.is_array()) {
-			cout << datos.dump(4) << endl;
+			string pacientes = jsonToString(datos);
+			cout << pacientes;
 		}
 	}else {
 		cout << "No se pudo abrir el archivo para leer." << endl;
@@ -68,15 +69,19 @@ void buscarPaciente(string nombre) {
 	int contador = 0;
 	if (archivo.is_open()) {
 		json pacientes;
+		json pacientesFinal;
 		archivo >> pacientes;
 		for (int i = 0; i < pacientes.size(); i++) {
 			if (pacientes[i].contains("nombre") && pacientes[i]["nombre"] == nombre) {
-				cout << pacientes[i].dump(4) << endl;
+				pacientesFinal.push_back(pacientes[i]);
 				contador++;
 			}
 		}
 		if (contador == 0) {
 			cout << "No se encontró ningún paciente con ese nombre." << endl;
+		}else {
+			string paciente = jsonToString(pacientesFinal);
+			cout << paciente;
 		}
 	}
 }
