@@ -42,4 +42,6 @@ void escribirClienteArchivo(json cliente);
 void crearCliente();
 void mostrarPacientes();
 void buscarPaciente(string nombre);
+Cliente buscarPacienteDni(string dni);
+void modificarPaciente(string dni);
 #endif  

@@ -28,7 +28,8 @@ void menuPacientes() {
 		cout << "0. Salir" << endl;
 
 		num = leerOpcion(); 
-
+		string dni;
+		Cliente paciente;
 		string nombre;
 		switch (num) {
 		case 1:
@@ -42,7 +43,11 @@ void menuPacientes() {
 			buscarPaciente(nombre);
 			break;
 		case 4:
-			//modificarCliente(); 
+			dni = leerCadenaNoVacia("Ingrese el dni del paciente para modificar: ");
+			paciente = buscarPacienteDni(dni);
+			if (paciente.getNombre() != "") {
+				modificarPaciente(dni);
+			}
 			break;
 		case 5:
 			//eliminarCliente(); 

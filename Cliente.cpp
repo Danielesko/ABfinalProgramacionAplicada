@@ -85,3 +85,89 @@ void buscarPaciente(string nombre) {
 		}
 	}
 }
+Cliente buscarPacienteDni(string dni) {
+	Cliente c = Cliente();
+
+	ifstream archivo("clientes.json");
+	if (!archivo.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
+		return c;
+	}
+
+	json pacientes;
+	try {
+		archivo >> pacientes;
+	}
+	catch (const std::exception& e) {
+		cerr << "Error al procesar el archivo JSON: " << e.what() << endl;
+		return c;
+	}
+	archivo.close();
+
+	for (const auto& paciente : pacientes) {
+		if (paciente.contains("dni") && paciente["dni"] == dni) {
+			return Cliente(
+				paciente["id"],
+				paciente["nombre"],
+				paciente["apellido"],
+				paciente["dni"],
+				paciente["telefono"],
+				paciente["fechaNac"],
+				paciente["localidad"]
+			);
+		}
+	}
+
+	cout << "No se encontró ningún paciente con ese DNI." << endl;
+	return c; // Retorna cliente vacío si no se encuentra
+}
+
+
+void modificarPaciente(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() == -1) {
+		cout << "El paciente no existe, no se puede modificar." << endl;
+		return;
+	}
+	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
+	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
+	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
+	string fechaNac = leerCadenaNoVacia("Ingrese la fecha de nacimiento del cliente: ");
+	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
+
+	Cliente clienteActualizado(
+		c.getId(),
+		nombre,
+		apellido,
+		dni,
+		tlf,
+		fechaNac,
+		localidad
+	);
+	ifstream archivoLectura("clientes.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
+		return;
+	}
+	json pacientes;
+	archivoLectura >> pacientes;
+	archivoLectura.close();
+	for (auto& paciente : pacientes) {
+		if (paciente.contains("dni") && paciente["dni"] == dni) {
+			paciente = clienteActualizado.to_json(); 
+			break;
+		}
+	}
+
+	ofstream archivoEscritura("clientes.json");
+	if (!archivoEscritura.is_open()) {
+		cerr << "Error: No se pudo escribir en el archivo de clientes." << endl;
+		return;
+	}
+
+	archivoEscritura << pacientes.dump(4); 
+	archivoEscritura.close();
+
+	cout << "Paciente modificado exitosamente." << endl;
+}
