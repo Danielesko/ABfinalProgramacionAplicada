@@ -1,6 +1,22 @@
 #include "ABfinalProgramacionAplicada.h"
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
+int leerOpcion() {
+	int opcion;
+	while (true) {
+		cout << "Ingrese una opción: ";
+		cin >> opcion;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Entrada inválida. Intente nuevamente." << endl;
+		}
+		else {
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			return opcion;
+		}
+	}
+}
 void menuPacientes() {
 	int num;
 	do {
@@ -10,12 +26,9 @@ void menuPacientes() {
 		cout << "4. Modificar un paciente" << endl;
 		cout << "5. Eliminar un paciente" << endl;
 		cout << "0. Salir" << endl;
-		cin >> num;
-		while (!(cin >> num)) {
-			cin.clear(); 
-			cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-			cout << "Por favor, ingrese un número válido: ";
-		}
+
+		num = leerOpcion(); 
+
 		string nombre;
 		switch (num) {
 		case 1:
@@ -27,22 +40,23 @@ void menuPacientes() {
 		case 3:
 			nombre = leerCadenaNoVacia("Ingrese el nombre del paciente: ");
 			buscarPaciente(nombre);
-			break;	
+			break;
 		case 4:
-			//modificarCliente();
+			//modificarCliente(); 
 			break;
 		case 5:
-			//eliminarCliente();
+			//eliminarCliente(); 
 			break;
 		case 0:
-			cout << "Saliendo." << endl;
+			cout << "Saliendo del sistema de gestión de pacientes..." << endl;
 			break;
 		default:
-			cout << "Opción no válida" << endl;
+			cout << "Opción no válida. Intente nuevamente." << endl;
 			break;
 		}
 	} while (num != 0);
 }
+
 void menuEmpleados() {
 }
 void menuQuejas() {
@@ -69,12 +83,15 @@ string jsonToString(json clientesJson) {
 	}
 	return pacientes;
 }
-string leerCadenaNoVacia(const string &mensaje) {
+string leerCadenaNoVacia(const string& mensaje) {
 	string entrada;
 	cout << mensaje;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	while (getline(cin, entrada), entrada.empty()) {
-		cout << "El campo no puede estar vacío. " << mensaje;
+	while (true) {
+		getline(cin, entrada);
+		if (!entrada.empty()) {
+			break; 
+		}
+		cout << "El campo no puede estar vacío. Intente nuevamente: ";
 	}
 	return entrada;
 }
