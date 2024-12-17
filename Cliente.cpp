@@ -85,11 +85,13 @@ void buscarPaciente(string nombre) {
 		}
 		if (contador == 0) {
 			cout << "No se encontró ningún paciente con ese nombre." << endl;
-		}else {
+		}
+		else {
 			string paciente = jsonToString(pacientesFinal);
 			cout << paciente;
 		}
 	}
+	
 }
 Cliente buscarPacienteDni(string dni) {
 	Cliente c = Cliente();
@@ -155,6 +157,7 @@ void menuModificarPaciente() {
 		mofificarPacienteFechaNac(dni);
 		break;
 	case 6:
+		modificarPacienteLocalidad(dni);
 		break;
 	case 0:
 		cout << "Saliendo del sistema de gestión de modificacion de pacientes..." << endl;
@@ -165,13 +168,59 @@ void menuModificarPaciente() {
 	}
 
 }
-void mofificarPacienteFechaNac(string dni) {
+void modificarPacienteLocalidad(string dni) {
 	Cliente c = buscarPacienteDni(dni);
-	if (c.getId() == -1) {
+	if (c.getId() < 0) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
 	}
-	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+	else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
+	}
+	string localidadNueva = leerCadenaNoVacia("Ingrese la nueva localidad: ");
+	Cliente clienteActualizado(
+		c.getId(),
+		c.getNombre(),
+		c.getApellido(),
+		c.getDni(),
+		c.getTlf(),
+		c.getFechaNac(),
+		localidadNueva
+	);
+	ifstream archivoLectura("clientes.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
+		return;
+	}
+	json pacientes;
+	archivoLectura >> pacientes;
+	archivoLectura.close();
+	for (auto& paciente : pacientes) {
+		if (paciente.contains("dni") && paciente["dni"] == dni) {
+			paciente = clienteActualizado.to_json();
+			break;
+		}
+	}
+	ofstream archivoEscritura("clientes.json");
+	if (!archivoEscritura.is_open()) {
+		cerr << "Error: No se pudo escribir en el archivo de clientes." << endl;
+		return;
+	}
+	archivoEscritura << pacientes.dump(4);
+	archivoEscritura.close();
+	cout << "Paciente modificado exitosamente." << endl;
+}
+void mofificarPacienteFechaNac(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() == 0) {
+		cout << "El paciente no existe, no se puede modificar." << endl;
+		return;
+	}
+	else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
+	}
 	string fechaNueva = leerCadenaNoVacia("Ingrese la nueva fecha de nacimiento: ");
 	Cliente clienteActualizado(
 		c.getId(),
@@ -207,11 +256,14 @@ void mofificarPacienteFechaNac(string dni) {
 }
 void modificarPacienteTlf(string dni) {
 	Cliente c = buscarPacienteDni(dni);
-	if (c.getId() == -1) {
+	if (c.getId() == 0) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
 	}
-	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+	else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
+	}
 	string tlfNuevo = leerCadenaNoVacia("Ingrese el nuevo telefono: ");
 
 	Cliente clienteActualizado(
@@ -251,11 +303,14 @@ void modificarPacienteTlf(string dni) {
 }
 void modificarPacienteApellido(string dni) {
 	Cliente c = buscarPacienteDni(dni);
-	if (c.getId() == -1) {
+	if (c.getId() == 0) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
 	}
-	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+	else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
+	}
 	string apellidoNuevo = leerCadenaNoVacia("Ingrese el nuevo apellido: ");
 
 	Cliente clienteActualizado(
@@ -295,11 +350,13 @@ void modificarPacienteApellido(string dni) {
 }
 void mofificarPacienteNombre(string dni) {
 	Cliente c = buscarPacienteDni(dni);
-	if (c.getId() == -1) {
+	if (c.getId() == 0) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
+	}else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
 	}
-	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
 	string nombreNuevo = leerCadenaNoVacia("Ingrese el nuevo nombre: ");
 
 	Cliente clienteActualizado(
@@ -339,11 +396,14 @@ void mofificarPacienteNombre(string dni) {
 }
 void modificarPacienteDni(string dni) {
 	Cliente c = buscarPacienteDni(dni);
-	if (c.getId() == -1) {
+	if (c.getId() == 0) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
 	}
-	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+	else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
+	}
 	string dniNuevo = leerCadenaNoVacia("Ingrese el nuevo dni: ");
 
 	Cliente clienteActualizado(
@@ -383,9 +443,13 @@ void modificarPacienteDni(string dni) {
 }
 void eliminarPaciente(string dni) {
 	Cliente c = buscarPacienteDni(dni);
-	if (c.getId() == -1) {
-		cout << "El paciente no existe, no se puede eliminar." << endl;
+	if (c.getId() < 0) {
+		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
+	}
+	else {
+		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+
 	}
 	ifstream archivoLectura("clientes.json");
 	if (!archivoLectura.is_open()) {

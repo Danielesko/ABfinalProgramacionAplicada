@@ -50,4 +50,5 @@ void mofificarPacienteNombre(string dni);
 void modificarPacienteApellido(string dni);
 void modificarPacienteTlf(string dni);
 void mofificarPacienteFechaNac(string dni);
+void modificarPacienteLocalidad(string dni);
 #endif  
