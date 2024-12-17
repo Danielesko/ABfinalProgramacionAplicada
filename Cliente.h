@@ -44,4 +44,5 @@ void mostrarPacientes();
 void buscarPaciente(string nombre);
 Cliente buscarPacienteDni(string dni);
 void modificarPaciente(string dni);
+void eliminarPaciente(string dni);
 #endif  

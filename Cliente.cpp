@@ -171,3 +171,34 @@ void modificarPaciente(string dni) {
 
 	cout << "Paciente modificado exitosamente." << endl;
 }
+void eliminarPaciente(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() == -1) {
+		cout << "El paciente no existe, no se puede eliminar." << endl;
+		return;
+	}
+	ifstream archivoLectura("clientes.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
+		return;
+	}
+	json pacientes;
+	archivoLectura >> pacientes;
+	archivoLectura.close();
+	json pacientesActualizados;
+	for (int i = 0; i < pacientes.size(); i++) {
+		if (pacientes[i].contains("dni") && pacientes[i]["dni"] != dni) {
+			pacientesActualizados.push_back(pacientes[i]);
+		}
+	}
+	ofstream archivo("clientes.json");
+	if (!archivo.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
+		return;
+	}else {
+		archivo << pacientesActualizados.dump(4);
+		archivo.close();
+		cout << "Paciente eliminado exitosamente." << endl;
+	}
+
+}

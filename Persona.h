@@ -4,7 +4,7 @@
 #include <string>  
 
 class Persona {
-public:
+protected:
     int id;                
     std::string nombre;    
     std::string apellido;  

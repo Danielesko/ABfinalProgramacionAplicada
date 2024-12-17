@@ -44,13 +44,15 @@ void menuPacientes() {
 			break;
 		case 4:
 			dni = leerCadenaNoVacia("Ingrese el dni del paciente para modificar: ");
-			/*paciente = buscarPacienteDni(dni);
+			paciente = buscarPacienteDni(dni);
 			if (paciente.getNombre() != "") {
 				modificarPaciente(dni);
-			}*/
+			}
 			break;
 		case 5:
-			//eliminarCliente(); 
+			mostrarPacientes();
+			dni = leerCadenaNoVacia("Ingrese el dni del paciente para eliminar: ");
+			eliminarPaciente(dni); 
 			break;
 		case 0:
 			cout << "Saliendo del sistema de gestión de pacientes..." << endl;
