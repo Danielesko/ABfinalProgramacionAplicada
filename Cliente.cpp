@@ -8,7 +8,6 @@ void escribirClienteArchivo(json cliente) {
 	if (archivoLeer.is_open() && archivoLeer.peek() != ifstream::traits_type::eof()) {
 		archivoLeer >> clientesExistentes;
 		if (!clientesExistentes.is_array()) {
-			cout << "El archivo no contiene un array válido. Se sobrescribirá con un array nuevo." << endl;
 			clientesExistentes = json::array();
 		}
 		archivoLeer.close();
@@ -153,6 +152,7 @@ void menuModificarPaciente() {
 		modificarPacienteTlf(dni);
 		break;
 	case 5:
+		mofificarPacienteFechaNac(dni);
 		break;
 	case 6:
 		break;
@@ -164,6 +164,46 @@ void menuModificarPaciente() {
 		break;
 	}
 
+}
+void mofificarPacienteFechaNac(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() == -1) {
+		cout << "El paciente no existe, no se puede modificar." << endl;
+		return;
+	}
+	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
+	string fechaNueva = leerCadenaNoVacia("Ingrese la nueva fecha de nacimiento: ");
+	Cliente clienteActualizado(
+		c.getId(),
+		c.getNombre(),
+		c.getApellido(),
+		c.getDni(),
+		c.getTlf(),
+		fechaNueva,
+		c.getLocalidad()
+	);
+	ifstream archivoLectura("clientes.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
+		return;
+	}
+	json pacientes;
+	archivoLectura >> pacientes;
+	archivoLectura.close();
+	for (auto& paciente : pacientes) {
+		if (paciente.contains("dni") && paciente["dni"] == dni) {
+			paciente = clienteActualizado.to_json();
+			break;
+		}
+	}
+	ofstream archivoEscritura("clientes.json");
+	if (!archivoEscritura.is_open()) {
+		cerr << "Error: No se pudo escribir en el archivo de clientes." << endl;
+		return;
+	}
+	archivoEscritura << pacientes.dump(4);
+	archivoEscritura.close();
+	cout << "Paciente modificado exitosamente." << endl;
 }
 void modificarPacienteTlf(string dni) {
 	Cliente c = buscarPacienteDni(dni);
