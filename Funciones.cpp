@@ -29,7 +29,7 @@ void menuPacientes() {
 
 		num = leerOpcion(); 
 		string dni;
-		Cliente paciente;
+		Cliente paciente = Cliente();
 		string nombre;
 		switch (num) {
 		case 1:
@@ -44,10 +44,10 @@ void menuPacientes() {
 			break;
 		case 4:
 			dni = leerCadenaNoVacia("Ingrese el dni del paciente para modificar: ");
-			paciente = buscarPacienteDni(dni);
+			/*paciente = buscarPacienteDni(dni);
 			if (paciente.getNombre() != "") {
 				modificarPaciente(dni);
-			}
+			}*/
 			break;
 		case 5:
 			//eliminarCliente(); 
