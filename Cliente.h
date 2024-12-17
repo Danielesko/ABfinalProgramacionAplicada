@@ -45,4 +45,5 @@ void buscarPaciente(string nombre);
 Cliente buscarPacienteDni(string dni);
 void menuModificar();
 void eliminarPaciente(string dni);
+void modificarPacienteDni(string dni);
 #endif  
