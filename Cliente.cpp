@@ -51,7 +51,14 @@ void mostrarPacientes() {
 	json datos;
 	archivo.open("clientes.json");
 	if (archivo.is_open()) {
-		archivo >> datos;
+		try {
+			archivo >> datos; // Intenta leer y parsear el JSON
+		}
+		catch (const json::parse_error& e) {
+			cerr << "Error al leer el archivo JSON: " << e.what() << endl;
+			archivo.close();
+			return;
+		}
 		if (datos.size() == 0) {
 			cout << "No hay pacientes registrados." << endl;
 		}
@@ -155,7 +162,7 @@ void modificarPaciente(string dni) {
 	archivoLectura.close();
 	for (auto& paciente : pacientes) {
 		if (paciente.contains("dni") && paciente["dni"] == dni) {
-			paciente = clienteActualizado.to_json(); 
+			paciente = clienteActualizado.to_json();
 			break;
 		}
 	}
@@ -195,10 +202,10 @@ void eliminarPaciente(string dni) {
 	if (!archivo.is_open()) {
 		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
 		return;
-	}else {
+	}
+	else {
 		archivo << pacientesActualizados.dump(4);
 		archivo.close();
 		cout << "Paciente eliminado exitosamente." << endl;
 	}
-
 }
