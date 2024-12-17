@@ -48,4 +48,5 @@ void eliminarPaciente(string dni);
 void modificarPacienteDni(string dni);
 void mofificarPacienteNombre(string dni);
 void modificarPacienteApellido(string dni);
+void modificarPacienteTlf(string dni);
 #endif  
