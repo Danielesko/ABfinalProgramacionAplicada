@@ -43,7 +43,9 @@ void crearCliente();
 void mostrarPacientes();
 void buscarPaciente(string nombre);
 Cliente buscarPacienteDni(string dni);
-void menuModificar();
+void menuModificarPaciente();
 void eliminarPaciente(string dni);
 void modificarPacienteDni(string dni);
+void mofificarPacienteNombre(string dni);
+void modificarPacienteApellido(string dni);
 #endif  

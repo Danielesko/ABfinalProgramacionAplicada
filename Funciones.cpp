@@ -43,7 +43,7 @@ void menuPacientes() {
 			buscarPaciente(nombre);
 			break;
 		case 4:
-			menuModificar();
+			menuModificarPaciente();
 			break;
 		case 5:
 			mostrarPacientes();
