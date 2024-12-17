@@ -43,6 +43,6 @@ void crearCliente();
 void mostrarPacientes();
 void buscarPaciente(string nombre);
 Cliente buscarPacienteDni(string dni);
-void modificarPaciente(string dni);
+void menuModificar();
 void eliminarPaciente(string dni);
 #endif  

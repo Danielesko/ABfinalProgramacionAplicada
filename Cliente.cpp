@@ -52,7 +52,7 @@ void mostrarPacientes() {
 	archivo.open("clientes.json");
 	if (archivo.is_open()) {
 		try {
-			archivo >> datos; // Intenta leer y parsear el JSON
+			archivo >> datos; 
 		}
 		catch (const json::parse_error& e) {
 			cerr << "Error al leer el archivo JSON: " << e.what() << endl;
@@ -126,31 +126,61 @@ Cliente buscarPacienteDni(string dni) {
 	}
 
 	cout << "No se encontró ningún paciente con ese DNI." << endl;
-	return c; // Retorna cliente vacío si no se encuentra
+	return c; 
+}
+void menuModificar() {
+	cout << "1.Modificar dni" << endl;
+	cout << "2.Modificar nombre" << endl;
+	cout << "3.Modificar apellido" << endl;
+	cout << "4.Modificar telefono" << endl;
+	cout << "5.Modificar fecha de nacimiento" << endl;
+	cout << "6.Modificar localidad" << endl;
+	cout << "0.Salir" << endl;
+	int num = leerOpcion();
+	Cliente paciente;
+	string dni;
+	switch (num) {
+	case 1:
+		dni = leerCadenaNoVacia("Ingrese el dni del paciente para modificar: ");
+		paciente = buscarPacienteDni(dni);
+		modificarPacienteDni(dni);
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	case 0:
+		break;
+	default:
+		cout << "Opción no válida. Intente nuevamente." << endl;
+		break;
+	}
+
 }
 
-
-void modificarPaciente(string dni) {
+void modificarPacienteDni(string dni) {
 	Cliente c = buscarPacienteDni(dni);
 	if (c.getId() == -1) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
 	}
 	cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
-	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
-	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
-	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
-	string fechaNac = leerCadenaNoVacia("Ingrese la fecha de nacimiento del cliente: ");
-	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
+	string dniNuevo = leerCadenaNoVacia("Ingrese el nuevo dni: ");
 
 	Cliente clienteActualizado(
 		c.getId(),
-		nombre,
-		apellido,
-		dni,
-		tlf,
-		fechaNac,
-		localidad
+		c.getNombre(),
+		c.getApellido(),
+		dniNuevo,
+		c.getTlf(),
+		c.getFechaNac(),
+		c.getLocalidad()
 	);
 	ifstream archivoLectura("clientes.json");
 	if (!archivoLectura.is_open()) {

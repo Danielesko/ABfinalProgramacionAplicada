@@ -43,11 +43,7 @@ void menuPacientes() {
 			buscarPaciente(nombre);
 			break;
 		case 4:
-			dni = leerCadenaNoVacia("Ingrese el dni del paciente para modificar: ");
-			paciente = buscarPacienteDni(dni);
-			if (paciente.getNombre() != "") {
-				modificarPaciente(dni);
-			}
+			menuModificar();
 			break;
 		case 5:
 			mostrarPacientes();
