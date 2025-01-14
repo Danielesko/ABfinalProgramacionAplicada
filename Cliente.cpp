@@ -17,7 +17,7 @@ void escribirClienteArchivo(json cliente) {
 	}
 	clientesExistentes.push_back(cliente);
 
-	ofstream archivoEscribir("clientes.json", ios::trunc); 
+	ofstream archivoEscribir("clientes.json", ios::out); 
 	if (archivoEscribir.is_open()) {
 		archivoEscribir << clientesExistentes.dump(4); 
 		archivoEscribir.close();
