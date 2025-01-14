@@ -48,7 +48,7 @@ void menuPacientes() {
 			break;
 		case 5:
 			mostrarPacientes();
-			dni = leerCadenaNoVacia("Ingrese el dni del paciente para eliminar: ");
+			dni = leerDni("Ingrese el dni del paciente para eliminar: ");
 			eliminarPaciente(dni); 
 			break;
 		case 0:
@@ -93,21 +93,23 @@ string leerCadenaNoVacia(const string& mensaje) {
 		cout << mensaje;
 		getline(cin, entrada);
 		if (!entrada.empty()) {
-			break; 
+			break;
 		}
 		cout << "El campo no puede estar vacío. Intente nuevamente: ";
 	}
 	return entrada;
 }
+
 string leerDni(const string& mensaje) {
 	string entrada;
 	regex dniRegex("^[0-9]{8}[A-HJ-NP-TV-Z]$");
 	while (true) {
-		entrada = leerCadenaNoVacia(mensaje); 
+		entrada = leerCadenaNoVacia(mensaje);
 		if (regex_match(entrada, dniRegex)) {
+			cout << "DNI válido." << endl;
 			break;
 		}
-		cout << "El DNI debe tener 8 numero y luego una ultima letra. Intente nuevamente: ";
+		cout << "El DNI debe tener 8 números y luego una última letra en mayusculas. Intente nuevamente: ";
 	}
 	return entrada;
 }
