@@ -38,7 +38,7 @@ void crearCliente() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
 	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
-	string dni = leerCadenaNoVacia("Ingrese el DNI del cliente: ");
+	string dni = leerDni("Ingrese el DNI del cliente: ");
 	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
 	string fechaNac = leerCadenaNoVacia("Ingrese la fecha de nacimiento del cliente: ");
 	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
@@ -139,7 +139,7 @@ void menuModificarPaciente() {
 	cout << "0.Salir" << endl;
 	int num = leerOpcion();
 	string dni;
-	dni = leerCadenaNoVacia("Ingrese el dni del paciente para modificar: ");
+	dni = leerDni("Ingrese el dni del paciente para modificar: ");
 	switch (num) {
 	case 1:
 		modificarPacienteDni(dni);
@@ -404,7 +404,7 @@ void modificarPacienteDni(string dni) {
 		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
 
 	}
-	string dniNuevo = leerCadenaNoVacia("Ingrese el nuevo dni: ");
+	string dniNuevo = leerDni("Ingrese el nuevo dni: ");
 
 	Cliente clienteActualizado(
 		c.getId(),

@@ -6,8 +6,6 @@
 int main()
 {
 	int num;
-	cout << "Hello CMake." << endl;
-	cout << "Bienvenido a la aplicación" << endl;
 	do {
 		cout << "Seleccione una opción" << endl;
 		cout << "1 Pacientes" << endl;

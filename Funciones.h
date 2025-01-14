@@ -5,6 +5,8 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include "Cliente.h"
+#include <regex>
+
 using json = nlohmann::json;
 using namespace std;
 
@@ -18,4 +20,5 @@ string jsonToString(json clientesJson);
 void crearCliente();
 string leerCadenaNoVacia(const string &mensaje);
 int leerOpcion();
+string leerDni(const string& mensaje);
 #endif 

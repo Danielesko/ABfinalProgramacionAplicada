@@ -1,5 +1,6 @@
 #include "ABfinalProgramacionAplicada.h"
 #include <nlohmann/json.hpp>
+
 using json = nlohmann::json;
 int leerOpcion() {
 	int opcion;
@@ -88,13 +89,25 @@ string jsonToString(json clientesJson) {
 }
 string leerCadenaNoVacia(const string& mensaje) {
 	string entrada;
-	cout << mensaje;
 	while (true) {
+		cout << mensaje;
 		getline(cin, entrada);
 		if (!entrada.empty()) {
 			break; 
 		}
 		cout << "El campo no puede estar vacío. Intente nuevamente: ";
+	}
+	return entrada;
+}
+string leerDni(const string& mensaje) {
+	string entrada;
+	regex dniRegex("^[0-9]{8}[A-HJ-NP-TV-Z]$");
+	while (true) {
+		entrada = leerCadenaNoVacia(mensaje); 
+		if (regex_match(entrada, dniRegex)) {
+			break;
+		}
+		cout << "El DNI debe tener 8 numero y luego una ultima letra. Intente nuevamente: ";
 	}
 	return entrada;
 }
