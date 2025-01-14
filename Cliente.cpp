@@ -4,8 +4,7 @@
 int Cliente::idAnterior = 1;
 void escribirClienteArchivo(json cliente) {
 	json clientesExistentes;
-	ifstream archivoLeer("clientes.json");
-
+	ifstream archivoLeer("clientes.json", ios::in | ios::binary); 
 	if (archivoLeer.is_open() && archivoLeer.peek() != ifstream::traits_type::eof()) {
 		archivoLeer >> clientesExistentes;
 		if (!clientesExistentes.is_array()) {
@@ -17,7 +16,7 @@ void escribirClienteArchivo(json cliente) {
 	}
 	clientesExistentes.push_back(cliente);
 
-	ofstream archivoEscribir("clientes.json", ios::out); 
+	ofstream archivoEscribir("clientes.json", ios::out | ios::binary);
 	if (archivoEscribir.is_open()) {
 		archivoEscribir << clientesExistentes.dump(4); 
 		archivoEscribir.close();
@@ -31,6 +30,7 @@ void escribirClienteArchivo(json cliente) {
 void crearCliente() {
 	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
 	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
+	cout << apellido;
 	string dni = leerDni("Ingrese el DNI del cliente: ");
 	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
 	string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
@@ -63,8 +63,7 @@ void mostrarPacientes() {
 	}
 }
 void buscarPaciente(string nombre) {
-	ifstream archivo;
-	archivo.open("clientes.json");
+	ifstream archivo("clientes.json", ios::in | ios::binary);
 	int contador = 0;
 	if (archivo.is_open()) {
 		json pacientes;

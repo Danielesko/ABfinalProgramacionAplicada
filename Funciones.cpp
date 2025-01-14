@@ -97,6 +97,7 @@ string leerCadenaNoVacia(const string& mensaje) {
 		}
 		cout << "El campo no puede estar vacío. Intente nuevamente: ";
 	}
+	cout << entrada;
 	return entrada;
 }
 
@@ -108,7 +109,7 @@ string leerDni(const string& mensaje) {
 		if (regex_match(entrada, dniRegex)) {
 			break;
 		}
-		cout << "El DNI debe tener 8 números y luego una última letra en mayusculas. Intente nuevamente: ";
+		cout << "El DNI debe tener 8 números y luego una última. Intente nuevamente: ";
 	}
 	return entrada;
 }
