@@ -1,6 +1,7 @@
 #include "ABfinalProgramacionAplicada.h"
 #include "Persona.h"
 #include "Funciones.h"
+int Cliente::idAnterior = 1;
 void escribirClienteArchivo(json cliente) {
 	json clientesExistentes;
 	ifstream archivoLeer("clientes.json");
@@ -28,21 +29,13 @@ void escribirClienteArchivo(json cliente) {
 }
 
 void crearCliente() {
-	int id;
-    cout << "Ingrese el id del cliente: ";
-    while (!(cin >> id)) {
-        cout << "ID inválido. Ingrese un número entero: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
 	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
 	string dni = leerDni("Ingrese el DNI del cliente: ");
-	string tlf = leerTlf("Ingrese el teléfono del cliente: ");
+	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
 	string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
 	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
-	Cliente cliente = Cliente(id, nombre, apellido, dni, tlf, fechaNac, localidad);
+	Cliente cliente = Cliente(nombre, apellido, dni, tlf, fechaNac, localidad);
 	escribirClienteArchivo(cliente.to_json());
 }
 void mostrarPacientes() {
@@ -115,7 +108,6 @@ Cliente buscarPacienteDni(string dni) {
 	for (const auto& paciente : pacientes) {
 		if (paciente.contains("dni") && paciente["dni"] == dni) {
 			return Cliente(
-				paciente["id"],
 				paciente["nombre"],
 				paciente["apellido"],
 				paciente["dni"],
@@ -180,7 +172,6 @@ void modificarPacienteLocalidad(string dni) {
 	}
 	string localidadNueva = leerCadenaNoVacia("Ingrese la nueva localidad: ");
 	Cliente clienteActualizado(
-		c.getId(),
 		c.getNombre(),
 		c.getApellido(),
 		c.getDni(),
@@ -223,7 +214,6 @@ void mofificarPacienteFechaNac(string dni) {
 	}
 	string fechaNueva = leerFechaNac("Ingrese la nueva fecha de nacimiento: ");
 	Cliente clienteActualizado(
-		c.getId(),
 		c.getNombre(),
 		c.getApellido(),
 		c.getDni(),
@@ -267,7 +257,6 @@ void modificarPacienteTlf(string dni) {
 	string tlfNuevo = leerTlf("Ingrese el nuevo telefono: ");
 
 	Cliente clienteActualizado(
-		c.getId(),
 		c.getNombre(),
 		c.getApellido(),
 		c.getDni(),
@@ -314,7 +303,6 @@ void modificarPacienteApellido(string dni) {
 	string apellidoNuevo = leerCadenaNoVacia("Ingrese el nuevo apellido: ");
 
 	Cliente clienteActualizado(
-		c.getId(),
 		c.getNombre(),
 		apellidoNuevo,
 		c.getDni(),
@@ -360,7 +348,6 @@ void mofificarPacienteNombre(string dni) {
 	string nombreNuevo = leerCadenaNoVacia("Ingrese el nuevo nombre: ");
 
 	Cliente clienteActualizado(
-		c.getId(),
 		nombreNuevo,
 		c.getApellido(),
 		c.getDni(),
@@ -407,7 +394,6 @@ void modificarPacienteDni(string dni) {
 	string dniNuevo = leerDni("Ingrese el nuevo dni: ");
 
 	Cliente clienteActualizado(
-		c.getId(),
 		c.getNombre(),
 		c.getApellido(),
 		dniNuevo,

@@ -9,15 +9,15 @@ using json = nlohmann::json;
 
 class Cliente : public Persona {
 private:
+    static int idAnterior;
     std::string fechaNac;  
     std::string localidad; 
 
 public:
-    Cliente() : Persona(0, "", "", "", ""), fechaNac(""), localidad("") {}
+    Cliente() : Persona(idAnterior++, "", "", "", ""), fechaNac(""), localidad("") {}
 
-    Cliente(int id, std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string localidad)
-        : Persona(id, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {
-    }
+    Cliente(std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string localidad)
+        : Persona(idAnterior++, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {}
 
     json to_json() const {
         return json{
