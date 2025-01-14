@@ -124,3 +124,15 @@ string leerFechaNac(const string& mensaje) {
 	}
 	return entrada;
 }
+string leerTlf(const string& mensaje) {
+	string entrada;
+	regex tlfRegex("^[0-9]{9}$");
+	while (true) {
+		entrada = leerCadenaNoVacia(mensaje);
+		if (regex_match(entrada, tlfRegex)) {
+			break;
+		}
+		cout << "El telefono debe tener 9 números. Intente nuevamente: ";
+	}
+	return entrada;
+}

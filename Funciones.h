@@ -22,4 +22,5 @@ string leerCadenaNoVacia(const string &mensaje);
 int leerOpcion();
 string leerDni(const string& mensaje);
 string leerFechaNac(const string& mensaje);
+string leerTlf(const string& mensaje);
 #endif 

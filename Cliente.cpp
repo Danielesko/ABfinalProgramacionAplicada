@@ -39,7 +39,7 @@ void crearCliente() {
 	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
 	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
 	string dni = leerDni("Ingrese el DNI del cliente: ");
-	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
+	string tlf = leerTlf("Ingrese el teléfono del cliente: ");
 	string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
 	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
 	Cliente cliente = Cliente(id, nombre, apellido, dni, tlf, fechaNac, localidad);
@@ -221,7 +221,7 @@ void mofificarPacienteFechaNac(string dni) {
 		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
 
 	}
-	string fechaNueva = leerCadenaNoVacia("Ingrese la nueva fecha de nacimiento: ");
+	string fechaNueva = leerFechaNac("Ingrese la nueva fecha de nacimiento: ");
 	Cliente clienteActualizado(
 		c.getId(),
 		c.getNombre(),
@@ -264,7 +264,7 @@ void modificarPacienteTlf(string dni) {
 		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
 
 	}
-	string tlfNuevo = leerCadenaNoVacia("Ingrese el nuevo telefono: ");
+	string tlfNuevo = leerTlf("Ingrese el nuevo telefono: ");
 
 	Cliente clienteActualizado(
 		c.getId(),
