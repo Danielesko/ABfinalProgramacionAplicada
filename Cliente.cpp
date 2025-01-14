@@ -40,7 +40,7 @@ void crearCliente() {
 	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
 	string dni = leerDni("Ingrese el DNI del cliente: ");
 	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
-	string fechaNac = leerCadenaNoVacia("Ingrese la fecha de nacimiento del cliente: ");
+	string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
 	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
 	Cliente cliente = Cliente(id, nombre, apellido, dni, tlf, fechaNac, localidad);
 	escribirClienteArchivo(cliente.to_json());

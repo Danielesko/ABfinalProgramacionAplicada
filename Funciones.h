@@ -21,4 +21,5 @@ void crearCliente();
 string leerCadenaNoVacia(const string &mensaje);
 int leerOpcion();
 string leerDni(const string& mensaje);
+string leerFechaNac(const string& mensaje);
 #endif 

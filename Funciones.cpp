@@ -106,10 +106,21 @@ string leerDni(const string& mensaje) {
 	while (true) {
 		entrada = leerCadenaNoVacia(mensaje);
 		if (regex_match(entrada, dniRegex)) {
-			cout << "DNI válido." << endl;
 			break;
 		}
 		cout << "El DNI debe tener 8 números y luego una última letra en mayusculas. Intente nuevamente: ";
+	}
+	return entrada;
+}
+string leerFechaNac(const string& mensaje) {
+	string entrada; 
+	regex FechaNacRegex("^([0-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/([0-9]{4})$");
+	while (true) {
+		entrada = leerCadenaNoVacia(mensaje);
+		if (regex_match(entrada, FechaNacRegex)) {
+			break;
+		}
+		cout << "La fecha tiene que estar en el formato dd/mm/yyyy. Intente nuevamente: ";
 	}
 	return entrada;
 }
