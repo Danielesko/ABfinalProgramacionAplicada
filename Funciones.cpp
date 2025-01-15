@@ -89,13 +89,14 @@ string jsonToString(json clientesJson) {
 }
 string leerCadenaNoVacia(const string& mensaje) {
 	string entrada;
+	regex regexNombreApellido("^[A-Za-z]{2,}$"); // Al menos 2 caracteres, solo letras, sin tildes ni ñ
 	while (true) {
 		cout << mensaje;
 		getline(cin, entrada);
-		if (!entrada.empty()) {
+		if (regex_match(entrada, regexNombreApellido)) {
 			break;
 		}
-		cout << "El campo no puede estar vacío. Intente nuevamente: ";
+		cout << "Entrada inválida. Debe tener al menos 2 caracteres, solo letras, sin tildes ni ñ. Intente nuevamente: ";
 	}
 	return entrada;
 }
