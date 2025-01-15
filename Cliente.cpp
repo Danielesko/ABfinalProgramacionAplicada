@@ -28,11 +28,10 @@ void escribirClienteArchivo(json cliente) {
 }
 
 void crearCliente() {
-	string nombre = leerCadenaNoVacia("Ingrese el nombre del cliente: ");
-	string apellido = leerCadenaNoVacia("Ingrese el apellido del cliente: ");
-	cout << apellido;
+	string nombre = leerNombreApellido("Ingrese el nombre del cliente: ");
+	string apellido = leerNombreApellido("Ingrese el apellido del cliente: ");
 	string dni = leerDni("Ingrese el DNI del cliente: ");
-	string tlf = leerCadenaNoVacia("Ingrese el teléfono del cliente: ");
+	string tlf = leerTlf("Ingrese el teléfono del cliente: ");
 	string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
 	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
 	Cliente cliente = Cliente(nombre, apellido, dni, tlf, fechaNac, localidad);

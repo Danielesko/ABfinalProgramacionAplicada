@@ -97,7 +97,6 @@ string leerCadenaNoVacia(const string& mensaje) {
 		}
 		cout << "El campo no puede estar vacío. Intente nuevamente: ";
 	}
-	cout << entrada;
 	return entrada;
 }
 
@@ -136,4 +135,28 @@ string leerTlf(const string& mensaje) {
 		cout << "El telefono debe tener 9 números. Intente nuevamente: ";
 	}
 	return entrada;
+}
+string leerNombreApellido(const string& mensaje) {
+	string entrada;
+	string entradaFinal;
+	while (true) {
+		entrada = leerCadenaNoVacia(mensaje);
+		entradaFinal = entrada;
+		if (!entradaFinal.empty()) {
+			for (int i = 0; i < entradaFinal.size(); i++) {
+				if (entradaFinal[i] == 164) {
+					cout << "entro1";
+					entradaFinal[i] = 'n';
+				}
+				else if (entradaFinal[i] == 165) {
+					cout << "entro2";
+					entradaFinal[i] = 'N';
+				}
+				cout << entradaFinal[i] << endl;
+			}
+			break;
+		}
+		cout << "El campo no puede estar vacío. Intente nuevamente: ";
+	}
+	return entradaFinal;
 }

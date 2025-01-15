@@ -6,6 +6,7 @@
 #include <nlohmann/json.hpp>
 #include "Cliente.h"
 #include <regex>
+
 using json = nlohmann::json;
 using namespace std;
 
@@ -22,4 +23,5 @@ int leerOpcion();
 string leerDni(const string& mensaje);
 string leerFechaNac(const string& mensaje);
 string leerTlf(const string& mensaje);
+string leerNombreApellido(const string& mensaje);
 #endif 
