@@ -105,9 +105,12 @@ string leerNombreApellido(const string& mensaje) {
 	while (true) {
 		cout << mensaje;
 		getline(cin, entrada);
-		if (regex_match(entrada, regexNombreApellido)) {
-			break;
-		}
+		if (!entrada.empty()){
+			entrada[0] = toupper(entrada[0]);
+			if (regex_match(entrada, regexNombreApellido)) {
+				break;
+			}
+		}	
 		cout << "Entrada inválida. Debe tener al menos 2 caracteres, solo letras, sin tildes ni ñ. Intente nuevamente: ";
 	}
 	return entrada;
