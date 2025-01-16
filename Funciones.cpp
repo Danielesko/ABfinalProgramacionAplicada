@@ -40,7 +40,7 @@ void menuPacientes() {
 			mostrarPacientes();
 			break;
 		case 3:
-			nombre = leerCadenaNoVacia("Ingrese el nombre del paciente: ");
+			nombre = leerNombreApellido("Ingrese el nombre del paciente: ");
 			buscarPaciente(nombre);
 			break;
 		case 4:
@@ -89,7 +89,19 @@ string jsonToString(json clientesJson) {
 }
 string leerCadenaNoVacia(const string& mensaje) {
 	string entrada;
-	regex regexNombreApellido("^[A-Za-z]{2,}$"); // Al menos 2 caracteres, solo letras, sin tildes ni ñ
+	while (true) {
+		cout << mensaje;
+		getline(cin, entrada);
+		if (!entrada.empty()) {
+			break;
+		}
+		cout << "El campo no puede estar vacío. Intente nuevamente: ";
+	}
+	return entrada;
+}
+string leerNombreApellido(const string& mensaje) {
+	string entrada;
+	regex regexNombreApellido("^[A-Za-z]{2,}$"); 
 	while (true) {
 		cout << mensaje;
 		getline(cin, entrada);
@@ -100,12 +112,14 @@ string leerCadenaNoVacia(const string& mensaje) {
 	}
 	return entrada;
 }
-
 string leerDni(const string& mensaje) {
 	string entrada;
 	regex dniRegex("^[0-9]{8}[A-HJ-NP-TV-Z]$");
 	while (true) {
 		entrada = leerCadenaNoVacia(mensaje);
+		if (!entrada.empty() && entrada.length() == 9) {
+			entrada[8] = toupper(entrada[8]); 
+		}
 		if (regex_match(entrada, dniRegex)) {
 			break;
 		}
@@ -136,28 +150,4 @@ string leerTlf(const string& mensaje) {
 		cout << "El telefono debe tener 9 números. Intente nuevamente: ";
 	}
 	return entrada;
-}
-string leerNombreApellido(const string& mensaje) {
-	string entrada;
-	string entradaFinal;
-	while (true) {
-		entrada = leerCadenaNoVacia(mensaje);
-		entradaFinal = entrada;
-		if (!entradaFinal.empty()) {
-			for (int i = 0; i < entradaFinal.size(); i++) {
-				if (entradaFinal[i] == 164) {
-					cout << "entro1";
-					entradaFinal[i] = 'n';
-				}
-				else if (entradaFinal[i] == 165) {
-					cout << "entro2";
-					entradaFinal[i] = 'N';
-				}
-				cout << entradaFinal[i] << endl;
-			}
-			break;
-		}
-		cout << "El campo no puede estar vacío. Intente nuevamente: ";
-	}
-	return entradaFinal;
 }

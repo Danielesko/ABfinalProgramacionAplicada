@@ -298,7 +298,7 @@ void modificarPacienteApellido(string dni) {
 		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
 
 	}
-	string apellidoNuevo = leerCadenaNoVacia("Ingrese el nuevo apellido: ");
+	string apellidoNuevo = leerNombreApellido("Ingrese el nuevo apellido: ");
 
 	Cliente clienteActualizado(
 		c.getNombre(),
@@ -343,7 +343,7 @@ void mofificarPacienteNombre(string dni) {
 		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
 
 	}
-	string nombreNuevo = leerCadenaNoVacia("Ingrese el nuevo nombre: ");
+	string nombreNuevo = leerNombreApellido("Ingrese el nuevo nombre: ");
 
 	Cliente clienteActualizado(
 		nombreNuevo,
