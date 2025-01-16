@@ -57,3 +57,4 @@ Empleado buscarEmpleadoDni(string dni);
 void eliminarEmpleado(string dni);
 void menuModificarEmpleado();
 void modificarEmpleadoDni(string dni);
+void modificarEmpleadoNombre(string dni);
