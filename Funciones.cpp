@@ -76,7 +76,7 @@ void menuEmpleados() {
 		string nombre;
 		switch (num) {
 		case 1:
-			//crearEmpleado();
+			crearEmpleado();
 			break;
 		case 2:
 			//mostrarEmpleados();

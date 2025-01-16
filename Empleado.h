@@ -49,3 +49,5 @@ public:
 	static int getIdAnterior() { return idAnterior; }
 	std::string getCategoria() const { return categoria; }
 };
+void crearEmpleado();
+void escribirEmpleadoArchivo(json empleado);
