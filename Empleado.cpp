@@ -35,3 +35,48 @@ void escribirEmpleadoArchivo(json empleado) {
 	}
 	Empleado::guardarId();
 }
+void mostrarEmpleados() {
+	ifstream archivo;
+	json datos;
+	archivo.open("empleados.json");
+	if (archivo.is_open()) {
+		try {
+			archivo >> datos;
+		}
+		catch (const json::parse_error& e) {
+			cerr << "Error al leer el archivo JSON: " << e.what() << endl;
+			archivo.close();
+			return;
+		}
+		if (datos.size() == 0) {
+			cout << "No hay empleados registrados." << endl;
+		}else if (datos.is_array()) {
+			string empleados = jsonToString(datos);
+			cout << empleados;
+		}
+	}else {
+		cout << "No se pudo abrir el archivo para leer." << endl;
+	}
+}
+void buscarEmpleado(string nombre) {
+	ifstream archivo("empleados.json", ios::in | ios::binary);
+	int contador = 0;
+	if (archivo.is_open()) {
+		json empleados;
+		json empleadosFinal;
+		archivo >> empleados;
+		for (int i = 0; i < empleados.size(); i++) {
+			if (empleados[i].contains("nombre") && empleados[i]["nombre"] == nombre) {
+				empleadosFinal.push_back(empleados[i]);
+				contador++;
+			}
+		}
+		if (contador == 0) {
+			cout << "No se encontró ningún empleado con ese nombre." << endl;
+		}
+		else {
+			string empleado = jsonToString(empleadosFinal);
+			cout << empleado;
+		}
+	}
+}

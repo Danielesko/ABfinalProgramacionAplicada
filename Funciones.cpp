@@ -79,11 +79,11 @@ void menuEmpleados() {
 			crearEmpleado();
 			break;
 		case 2:
-			//mostrarEmpleados();
+			mostrarEmpleados();
 			break;
 		case 3:
 			nombre = leerNombreApellido("Ingrese el nombre del empleado: ");
-			//buscarEmpleado(nombre);
+			buscarEmpleado(nombre);
 			break;
 		case 4:
 			//menuModificarEmpleado();
@@ -107,24 +107,25 @@ void menuQuejas() {
 void menuCitas() {
 }
 string jsonToString(json clientesJson) {
-	string pacientes = "";
-	cout << "Pacientes: " << endl;
+	string frase = "";
 	for (int i = 0; i < clientesJson.size(); i++) {
 		if (clientesJson[i].contains("nombre"))
-			pacientes += "Nombre: " + clientesJson[i]["nombre"].get<std::string>() + "\n";
+			frase += "Nombre: " + clientesJson[i]["nombre"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("apellido"))
-			pacientes += "Apellido: " + clientesJson[i]["apellido"].get<std::string>() + "\n";
+			frase += "Apellido: " + clientesJson[i]["apellido"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("dni"))
-			pacientes += "DNI: " + clientesJson[i]["dni"].get<std::string>() + "\n";
+			frase += "DNI: " + clientesJson[i]["dni"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("telefono"))
-			pacientes += "Telefono: " + clientesJson[i]["telefono"].get<std::string>() + "\n";
+			frase += "Telefono: " + clientesJson[i]["telefono"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("localidad"))
-			pacientes += "Localidad: " + clientesJson[i]["localidad"].get<std::string>() + "\n";
+			frase += "Localidad: " + clientesJson[i]["localidad"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("fechaNac"))
-			pacientes += "Fecha de nacimiento: " + clientesJson[i]["fechaNac"].get<std::string>() + "\n";
-		pacientes += "\n";
+			frase += "Fecha de nacimiento: " + clientesJson[i]["fechaNac"].get<std::string>() + "\n";
+		if (clientesJson[i].contains("categoria"))
+			frase += "Categoria: " + clientesJson[i]["categoria"].get<std::string>() + "\n";
+		frase += "\n";
 	}
-	return pacientes;
+	return frase;
 }
 string leerCadenaNoVacia(const string& mensaje) {
 	string entrada;

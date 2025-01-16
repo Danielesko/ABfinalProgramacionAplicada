@@ -51,3 +51,5 @@ public:
 };
 void crearEmpleado();
 void escribirEmpleadoArchivo(json empleado);
+void mostrarEmpleados();
+void buscarEmpleado(string nombre);
