@@ -1,5 +1,6 @@
 #ifndef CLIENTE_H  
 #define CLIENTE_H
+#pragma once
 
 #include "Persona.h" 
 #include <string>      
@@ -10,8 +11,8 @@ using json = nlohmann::json;
 class Cliente : public Persona {
 private:
     static int idAnterior;
-    std::string fechaNac;  
-    std::string localidad; 
+    std::string fechaNac;
+    std::string localidad;
 
 public:
     Cliente() : Persona(0, "", "", "", ""), fechaNac(""), localidad("") {}
