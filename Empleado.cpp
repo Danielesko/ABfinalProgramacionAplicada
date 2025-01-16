@@ -164,7 +164,7 @@ void menuModificarEmpleado() {
 		modificarEmpleadoNombre(dni);
 		break;
 	case 3:
-		//modificarEmpleadoApellido(dni);
+		modificarEmpleadoApellido(dni);
 		break;
 	case 4:
 		//modificarPacienteTlf(dni);
@@ -236,6 +236,46 @@ void modificarEmpleadoNombre(string dni) {
 	Empleado empleadoActualizado(
 		nombreNuevo,
 		e.getApellido(),
+		e.getDni(),
+		e.getTlf(),
+		e.getCategoria()
+	);
+	ifstream archivoLectura("empleados.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return;
+	}
+	json empleados;
+	archivoLectura >> empleados;
+	archivoLectura.close();
+	for (auto& empleado : empleados) {
+		if (empleado.contains("dni") && empleado["dni"] == dni) {
+			empleado = empleadoActualizado.to_json();
+			break;
+		}
+	}
+	ofstream archivoEscritura("empleados.json");
+	if (!archivoEscritura.is_open()) {
+		cerr << "Error: No se pudo escribir en el archivo de empleados." << endl;
+		return;
+	}
+	archivoEscritura << empleados.dump(4);
+	archivoEscritura.close();
+	cout << "Empleado modificado exitosamente." << endl;
+}
+void modificarEmpleadoApellido(string dni) {
+	Empleado e = buscarEmpleadoDni(dni);
+	if (e.getId() == 0) {
+		cout << "El empleado no existe, no se puede modificar." << endl;
+		return;
+	}
+	else {
+		cout << "Empleado encontrado. Ingrese los nuevos datos." << endl;
+	}
+	string apellidoNuevo = leerNombreApellido("Ingrese el nuevo apellido: ");
+	Empleado empleadoActualizado(
+		e.getNombre(),
+		apellidoNuevo,
 		e.getDni(),
 		e.getTlf(),
 		e.getCategoria()

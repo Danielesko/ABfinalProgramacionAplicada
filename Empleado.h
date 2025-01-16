@@ -58,3 +58,4 @@ void eliminarEmpleado(string dni);
 void menuModificarEmpleado();
 void modificarEmpleadoDni(string dni);
 void modificarEmpleadoNombre(string dni);
+void modificarEmpleadoApellido(string dni);
