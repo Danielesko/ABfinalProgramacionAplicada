@@ -60,3 +60,4 @@ void modificarEmpleadoDni(string dni);
 void modificarEmpleadoNombre(string dni);
 void modificarEmpleadoApellido(string dni);
 void modificarEmpleadoTlf(string dni);
+void modificarEmpleadoCategoria(string dni);
