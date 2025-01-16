@@ -19,6 +19,33 @@ public:
     Cliente(std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string localidad)
         : Persona(idAnterior++, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {}
 
+    static void guardarId() {
+        ofstream archivo("id.json", std::ios::out);
+        if (archivo.is_open()) {
+            json config;
+            config["idAnterior"] = idAnterior;
+            archivo << config.dump(4);
+            archivo.close();
+        }
+        else {
+            std::cerr << "No se pudo guardar el idAnterior en el archivo." << std::endl;
+        }
+    }
+
+	static void cargarId() {
+		ifstream archivo("id.json", std::ios::in);
+		if (archivo.is_open()) {
+			json config;
+			archivo >> config;
+			idAnterior = config["idAnterior"];
+			archivo.close();
+		}
+		else {
+			std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
+		}
+	}
+
+
     json to_json() const {
         return json{
             {"id", getId()},
@@ -30,7 +57,7 @@ public:
             {"localidad", localidad}
         };
     }
-
+    static int getIdAnterior() {return idAnterior; }
     std::string getFechaNac() const { return fechaNac; }
     std::string getLocalidad() const { return localidad; }
 

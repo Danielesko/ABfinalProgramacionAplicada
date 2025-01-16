@@ -1,7 +1,7 @@
 #include "ABfinalProgramacionAplicada.h"
 #include "Persona.h"
 #include "Funciones.h"
-int Cliente::idAnterior = 1;
+int Cliente::idAnterior = 0;
 void escribirClienteArchivo(json cliente) {
 	json clientesExistentes;
 	ifstream archivoLeer("clientes.json", ios::in | ios::binary); 
@@ -25,6 +25,7 @@ void escribirClienteArchivo(json cliente) {
 	else {
 		cout << "No se pudo abrir el archivo para guardar." << endl;
 	}
+	Cliente::guardarId();
 }
 
 void crearCliente() {
@@ -33,7 +34,7 @@ void crearCliente() {
 	string dni = leerDni("Ingrese el DNI del cliente: ");
 	string tlf = leerTlf("Ingrese el teléfono del cliente: ");
 	string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
-	string localidad = leerCadenaNoVacia("Ingrese la localidad del cliente: ");
+	string localidad = leerNombreApellido("Ingrese la localidad del cliente: ");
 	Cliente cliente = Cliente(nombre, apellido, dni, tlf, fechaNac, localidad);
 	escribirClienteArchivo(cliente.to_json());
 }

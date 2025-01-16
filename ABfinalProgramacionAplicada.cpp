@@ -5,6 +5,7 @@
 
 int main()
 {
+	Cliente::cargarId();
 	int num;
 	do {
 		cout << "Seleccione una opción" << endl;
