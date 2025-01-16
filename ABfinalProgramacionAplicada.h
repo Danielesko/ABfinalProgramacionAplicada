@@ -11,6 +11,7 @@ using namespace std;
 using json = nlohmann::json;
 #include "Persona.h"
 #include "Cliente.h"
+#include "Empleado.h"
 #include "Funciones.h"
 
 

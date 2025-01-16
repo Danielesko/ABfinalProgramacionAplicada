@@ -21,7 +21,7 @@ int main()
 			menuPacientes();
 			break;
 		case 2:
-			//menuEmpleados();
+			menuEmpleados();
 			break;
 		case 3:
 			//menuQuejas();

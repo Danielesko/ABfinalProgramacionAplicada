@@ -62,7 +62,46 @@ void menuPacientes() {
 }
 
 void menuEmpleados() {
-}
+	int num;
+	do {
+		cout << "1. Ingresar un nuevo empleado" << endl;
+		cout << "2. Mostrar todos los empleados" << endl;
+		cout << "3. Buscar un empleado" << endl;
+		cout << "4. Modificar un empleado" << endl;
+		cout << "5. Eliminar un empleado" << endl;
+		cout << "0. Salir" << endl;
+		num = leerOpcion();
+		string dni;
+		Empleado empleado = Empleado();
+		string nombre;
+		switch (num) {
+		case 1:
+			//crearEmpleado();
+			break;
+		case 2:
+			//mostrarEmpleados();
+			break;
+		case 3:
+			nombre = leerNombreApellido("Ingrese el nombre del empleado: ");
+			//buscarEmpleado(nombre);
+			break;
+		case 4:
+			//menuModificarEmpleado();
+			break;
+		case 5:
+			//mostrarEmpleados();
+			dni = leerDni("Ingrese el dni del empleado para eliminar: ");
+			//eliminarEmpleado(dni);
+			break;
+		case 0:
+			cout << "Saliendo del sistema de gestión de empleados..." << endl;
+			break;
+		default:
+			cout << "Opción no válida. Intente nuevamente." << endl;
+			break;
+		}
+	} while (num != 0);
+}	
 void menuQuejas() {
 }
 void menuCitas() {
