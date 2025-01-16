@@ -1,7 +1,7 @@
 #include "ABfinalProgramacionAplicada.h"
 #include "Persona.h"
 #include "Funciones.h"
-int Cliente::idAnterior = 0;
+int Cliente::idAnterior = 1;
 void escribirClienteArchivo(json cliente) {
 	json clientesExistentes;
 	ifstream archivoLeer("clientes.json", ios::in | ios::binary); 

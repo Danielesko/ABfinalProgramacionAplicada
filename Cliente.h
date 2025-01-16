@@ -14,7 +14,7 @@ private:
     std::string localidad; 
 
 public:
-    Cliente() : Persona(idAnterior++, "", "", "", ""), fechaNac(""), localidad("") {}
+    Cliente() : Persona(0, "", "", "", ""), fechaNac(""), localidad("") {}
 
     Cliente(std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string localidad)
         : Persona(idAnterior++, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {}
@@ -57,7 +57,7 @@ public:
             {"localidad", localidad}
         };
     }
-    static int getIdAnterior() {return idAnterior; }
+    static int getIdAnterior() {return idAnterior;}
     std::string getFechaNac() const { return fechaNac; }
     std::string getLocalidad() const { return localidad; }
 
