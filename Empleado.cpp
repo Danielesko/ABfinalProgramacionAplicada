@@ -80,3 +80,68 @@ void buscarEmpleado(string nombre) {
 		}
 	}
 }
+void eliminarEmpleado(string dni) {
+	Empleado e = buscarEmpleadoDni(dni);
+	if (e.getId() < 0) {
+		cout << "El empleado no existe, no se puede modificar." << endl;
+		return;
+	}
+	else {
+		cout << "Empleado encontrado. Ingrese los nuevos datos." << endl;
+	}
+	ifstream archivoLectura("empleados.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return;
+	}
+	json empleados;
+	archivoLectura >> empleados;
+	archivoLectura.close();
+	json empleadosActualizados;
+	for (int i = 0; i < empleados.size(); i++) {
+		if (empleados[i].contains("dni") && empleados[i]["dni"] != dni) {
+			empleadosActualizados.push_back(empleados[i]);
+		}
+	}
+	ofstream archivo("empleados.json");
+	if (!archivo.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return;
+	}
+	else {
+		archivo << empleadosActualizados.dump(4);
+		archivo.close();
+		cout << "Empleado eliminado exitosamente." << endl;
+	}
+}
+Empleado buscarEmpleadoDni(string dni) {
+	Empleado e = Empleado();
+	ifstream archivo("empleados.json");
+	if (!archivo.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return e;
+	}
+	json empleados;
+	try {
+		archivo >> empleados;
+	}
+	catch (const json::parse_error& er) {
+		cerr << "Error al leer el archivo JSON: " << er.what() << endl;
+		return e;
+	}
+	archivo.close();
+	for (int i = 0; i < empleados.size(); i++) {
+		if (empleados[i].contains("dni") && empleados[i]["dni"] == dni) {
+			e = Empleado(
+				empleados[i]["nombre"].get<std::string>(),
+				empleados[i]["apellido"].get<std::string>(),
+				empleados[i]["dni"].get<std::string>(),
+				empleados[i]["telefono"].get<std::string>(),
+				empleados[i]["categoria"].get<std::string>()
+			);
+			break;
+		}
+	}
+	archivo.close();
+	return e;
+}

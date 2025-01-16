@@ -89,9 +89,9 @@ void menuEmpleados() {
 			//menuModificarEmpleado();
 			break;
 		case 5:
-			//mostrarEmpleados();
+			mostrarEmpleados();
 			dni = leerDni("Ingrese el dni del empleado para eliminar: ");
-			//eliminarEmpleado(dni);
+			eliminarEmpleado(dni);
 			break;
 		case 0:
 			cout << "Saliendo del sistema de gestión de empleados..." << endl;
