@@ -150,8 +150,7 @@ void menuModificarEmpleado() {
 	cout << "2.Modificar nombre" << endl;
 	cout << "3.Modificar apellido" << endl;
 	cout << "4.Modificar telefono" << endl;
-	cout << "5.Modificar fecha de nacimiento" << endl;
-	cout << "6.Modificar localidad" << endl;
+	cout << "5.Modificar categoria" << endl;
 	cout << "0.Salir" << endl;
 	int num = leerOpcion();
 	string dni;
@@ -167,13 +166,10 @@ void menuModificarEmpleado() {
 		modificarEmpleadoApellido(dni);
 		break;
 	case 4:
-		//modificarPacienteTlf(dni);
+		modificarEmpleadoTlf(dni);
 		break;
 	case 5:
-		//mofificarPacienteFechaNac(dnsi);
-		break;
-	case 6:
-		//modificarPacienteLocalidad(dni);
+		//mofificarEmpleadoCategoria(dni);
 		break;
 	case 0:
 		cout << "Saliendo del sistema de gestión de modificacion de pacientes..." << endl;
@@ -278,6 +274,46 @@ void modificarEmpleadoApellido(string dni) {
 		apellidoNuevo,
 		e.getDni(),
 		e.getTlf(),
+		e.getCategoria()
+	);
+	ifstream archivoLectura("empleados.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return;
+	}
+	json empleados;
+	archivoLectura >> empleados;
+	archivoLectura.close();
+	for (auto& empleado : empleados) {
+		if (empleado.contains("dni") && empleado["dni"] == dni) {
+			empleado = empleadoActualizado.to_json();
+			break;
+		}
+	}
+	ofstream archivoEscritura("empleados.json");
+	if (!archivoEscritura.is_open()) {
+		cerr << "Error: No se pudo escribir en el archivo de empleados." << endl;
+		return;
+	}
+	archivoEscritura << empleados.dump(4);
+	archivoEscritura.close();
+	cout << "Empleado modificado exitosamente." << endl;
+}
+void modificarEmpleadoTlf(string dni) {
+	Empleado e = buscarEmpleadoDni(dni);
+	if (e.getId() == 0) {
+		cout << "El empleado no existe, no se puede modificar." << endl;
+		return;
+	}
+	else {
+		cout << "Empleado encontrado. Ingrese los nuevos datos." << endl;
+	}
+	string tlfNuevo = leerTlf("Ingrese el nuevo teléfono: ");
+	Empleado empleadoActualizado(
+		e.getNombre(),
+		e.getApellido(),
+		e.getDni(),
+		tlfNuevo,
 		e.getCategoria()
 	);
 	ifstream archivoLectura("empleados.json");
