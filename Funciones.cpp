@@ -86,7 +86,7 @@ void menuEmpleados() {
 			buscarEmpleado(nombre);
 			break;
 		case 4:
-			//menuModificarEmpleado();
+			menuModificarEmpleado();
 			break;
 		case 5:
 			mostrarEmpleados();

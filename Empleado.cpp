@@ -145,3 +145,82 @@ Empleado buscarEmpleadoDni(string dni) {
 	archivo.close();
 	return e;
 }
+void menuModificarEmpleado() {
+	cout << "1.Modificar dni" << endl;
+	cout << "2.Modificar nombre" << endl;
+	cout << "3.Modificar apellido" << endl;
+	cout << "4.Modificar telefono" << endl;
+	cout << "5.Modificar fecha de nacimiento" << endl;
+	cout << "6.Modificar localidad" << endl;
+	cout << "0.Salir" << endl;
+	int num = leerOpcion();
+	string dni;
+	dni = leerDni("Ingrese el dni del empleado para modificar: ");
+	switch (num) {
+	case 1:
+		modificarEmpleadoDni(dni);
+		break;
+	case 2:
+		//mofificarPacienteNombre(dni);
+		break;
+	case 3:
+		//modificarPacienteApellido(dni);
+		break;
+	case 4:
+		//modificarPacienteTlf(dni);
+		break;
+	case 5:
+		//mofificarPacienteFechaNac(dnsi);
+		break;
+	case 6:
+		//modificarPacienteLocalidad(dni);
+		break;
+	case 0:
+		cout << "Saliendo del sistema de gestión de modificacion de pacientes..." << endl;
+		break;
+	default:
+		cout << "Opción no válida. Intente nuevamente." << endl;
+		break;
+	}
+}
+void modificarEmpleadoDni(string dni) {
+	Empleado e = buscarEmpleadoDni(dni);
+	if (e.getId() == 0) {
+		cout << "El empleado no existe, no se puede modificar." << endl;
+		return;
+	}
+	else {
+		cout << "Empleado encontrado. Ingrese los nuevos datos." << endl;
+	}
+	string dniNuevo = leerDni("Ingrese el nuevo DNI: ");
+	Empleado empleadoActualizado(
+		e.getNombre(),
+		e.getApellido(),
+		dniNuevo,
+		e.getTlf(),
+		e.getCategoria()
+	);
+	ifstream archivoLectura("empleados.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return;
+	}
+	json empleados;
+	archivoLectura >> empleados;
+	archivoLectura.close();
+	for (auto& empleado : empleados) {
+		if (empleado.contains("dni") && empleado["dni"] == dni) {
+			empleado = empleadoActualizado.to_json();
+			break;
+		}
+	}
+	ofstream archivoEscritura("empleados.json");
+	if (!archivoEscritura.is_open()) {
+		cerr << "Error: No se pudo escribir en el archivo de empleados." << endl;
+		return;
+	}
+	archivoEscritura << empleados.dump(4);
+	archivoEscritura.close();
+	cout << "Empleado modificado exitosamente." << endl;
+
+}
