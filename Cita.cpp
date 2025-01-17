@@ -35,8 +35,14 @@ vector<vector<string>> buscarCitas(string dniEmpleado) {
 	return citas;
 }
 bool coincidirCitas(string hora,string fecha, vector<vector<string>> citas) {
-	bool coindide = false;
-
+	bool coincide = false;
+	for (int i = 0; i < citas.size(); i++) {
+		if (citas[i][0] == fecha && citas[i][1] == hora) {
+			coincide = true;
+			break;
+		}
+	}
+	return coincide;
 }
 void crearCita() {
 	string dniPaciente = leerDni("Ingrese el DNI del paciente: ");
@@ -48,6 +54,13 @@ void crearCita() {
 	Empleado e = buscarEmpleadoDni(dniEmpleado);
 	vector <vector<string>> citas = buscarCitas(dniEmpleado);
 	bool sePuede = coincidirCitas(hora,fecha,citas);
+	if (sePuede = false) {
+		cout << "El empleado ya tiene una cita a esa hora y fecha." << endl;
+		return;
+	}
+	else {
+		Cita cita = Cita(0, hora, fecha, e.getId(), c.getId(), motivo);
+	}
 
 
 }
