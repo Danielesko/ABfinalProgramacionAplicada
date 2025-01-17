@@ -62,8 +62,7 @@ void escribirCita(json cita) {
 		archivoEscribir << citasExistentes.dump(4);
 		archivoEscribir.close();
 		cout << "Cita guardada correctamente." << endl;
-	}
-	else {
+	}else {
 		cout << "No se pudo abrir el archivo para guardar." << endl;
 	}
 	Cita::guardarId();
@@ -76,14 +75,16 @@ void crearCita() {
 	string motivo = leerCadenaNoVacia("Ingrese el motivo de la cita: ");
 	Cliente c = buscarPacienteDni(dniPaciente);
 	Empleado e = buscarEmpleadoDni(dniEmpleado);
-	vector <vector<string>> citas = buscarCitas(dniEmpleado);
-	bool sePuede = coincidirCitas(hora,fecha,citas);
-	if (sePuede = false) {
-		cout << "El empleado ya tiene una cita a esa hora y fecha." << endl;
-		return;
-	}
-	else {
-		Cita cita = Cita(0, hora, fecha, e.getId(), c.getId(), motivo);
-		escribirCita(cita.to_json());
+	if (c.getId() != 0 && e.getId() !=0) {
+		vector <vector<string>> citas = buscarCitas(dniEmpleado);
+		bool sePuede = coincidirCitas(hora, fecha, citas);
+		if (sePuede = false) {
+			cout << "El empleado ya tiene una cita a esa hora y fecha." << endl;
+			return;
+		}
+		else {
+			Cita cita = Cita(0, hora, fecha, e.getId(), c.getId(), motivo);
+			escribirCita(cita.to_json());
+		}
 	}
 }

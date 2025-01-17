@@ -139,10 +139,10 @@ Empleado buscarEmpleadoDni(string dni) {
 				empleados[i]["telefono"].get<std::string>(),
 				empleados[i]["categoria"].get<std::string>()
 			);
-			break;
+			return e;
 		}
 	}
-	archivo.close();
+	cout << "No se encontró ningún empleado con ese DNI." << endl;
 	return e;
 }
 void menuModificarEmpleado() {

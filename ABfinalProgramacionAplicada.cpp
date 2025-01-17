@@ -29,7 +29,7 @@ int main()
 			//menuQuejas();
 			break;
 		case 4:
-			//menuCitas();
+			menuCitas();
 			break;
 		case 0:
 			cout << "¡Adiós!." << endl;
