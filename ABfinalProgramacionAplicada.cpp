@@ -1,7 +1,4 @@
-﻿// ABfinalProgramacionAplicada.cpp: define el punto de entrada de la aplicación.
-//
-
-#include "ABfinalProgramacionAplicada.h"
+﻿#include "ABfinalProgramacionAplicada.h"
 
 int main()
 {
@@ -15,7 +12,11 @@ int main()
 		cout << "2 Empleados" << endl;
 		cout << "3 Citas" << endl;
 		cout << "0. Salir" << endl;
-		cin >> num;
+		while (!(cin >> num)) {
+			cout << "Entrada no válida. Por favor, ingrese un número." << endl;
+			cin.clear(); 
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+		}
 		switch (num)
 		{
 		case 1:
