@@ -58,3 +58,6 @@ public:
 	std::string getMotivo() const { return motivo; }
 		
 };
+void crearCita();
+vector<string> buscarCitas(string dniEmpleado);
+bool coincidirCitas(string dniEmpleado, string dniPaciente);
