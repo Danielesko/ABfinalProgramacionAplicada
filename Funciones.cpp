@@ -102,8 +102,6 @@ void menuEmpleados() {
 		}
 	} while (num != 0);
 }	
-void menuQuejas() {
-}
 void menuCitas() {
 	int num;
 	do {
@@ -128,7 +126,7 @@ void menuCitas() {
 			buscarCitasPaciente(dni);
 			break;
 		case 4:
-			//menuModificarCita();
+			menuModificarCita();
 			break;
 		case 5:
 			dni = leerDni("Ingrese el dni del paciente para eliminar: ");

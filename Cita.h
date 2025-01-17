@@ -62,3 +62,4 @@ void escribirCita(json cita);
 void mostrarCitas();
 void buscarCitasPaciente(string nombre);
 void eliminarCita(string dni);
+void menuModificarCita();

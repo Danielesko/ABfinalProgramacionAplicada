@@ -11,7 +11,7 @@ add_executable(ABfinalProgramacionAplicada
     Empleado.cpp
     Cliente.cpp  
     Cita.cpp
-    Quejas.cpp
+    
     Funciones.h
     Funciones.cpp
  "Cita.h")
