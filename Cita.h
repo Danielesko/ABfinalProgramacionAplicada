@@ -59,5 +59,5 @@ public:
 		
 };
 void crearCita();
-vector<string> buscarCitas(string dniEmpleado);
-bool coincidirCitas(string dniEmpleado, string dniPaciente);
+vector <vector<string>> buscarCitas(string dniEmpleado);
+bool coincidirCitas(string hora, string fecha, vector<vector<string>> citas);

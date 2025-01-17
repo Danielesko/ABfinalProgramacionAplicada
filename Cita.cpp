@@ -44,6 +44,30 @@ bool coincidirCitas(string hora,string fecha, vector<vector<string>> citas) {
 	}
 	return coincide;
 }
+void escribirCita(json cita) {
+	json citasExistentes;
+	ifstream archivoLeer("citas.json", ios::in | ios::binary);
+	if (archivoLeer.is_open() && archivoLeer.peek() != ifstream::traits_type::eof()) {
+		archivoLeer >> citasExistentes;
+		if (!citasExistentes.is_array()) {
+			citasExistentes = json::array();
+		}
+		archivoLeer.close();
+	}else {
+		citasExistentes = json::array();
+	}
+	citasExistentes.push_back(cita);
+	ofstream archivoEscribir("citas.json", ios::out | ios::binary);
+	if (archivoEscribir.is_open()) {
+		archivoEscribir << citasExistentes.dump(4);
+		archivoEscribir.close();
+		cout << "Cita guardada correctamente." << endl;
+	}
+	else {
+		cout << "No se pudo abrir el archivo para guardar." << endl;
+	}
+	Cita::guardarId();
+}
 void crearCita() {
 	string dniPaciente = leerDni("Ingrese el DNI del paciente: ");
 	string dniEmpleado = leerDni("Ingrese el DNI del empleado: ");
