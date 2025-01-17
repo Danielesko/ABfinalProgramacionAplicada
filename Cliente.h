@@ -19,7 +19,9 @@ public:
 
     Cliente(std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string localidad)
         : Persona(idAnterior++, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {}
-
+    Cliente(int id, std::string nombre, std::string apellido, std::string dni, std::string tlf, std::string fechaNac, std::string localidad)
+        : Persona(id, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {
+    }
     static void guardarId() {
         ofstream archivo("id.json", std::ios::out);
         if (archivo.is_open()) {

@@ -107,6 +107,7 @@ Cliente buscarPacienteDni(string dni) {
 	for (const auto& paciente : pacientes) {
 		if (paciente.contains("dni") && paciente["dni"] == dni) {
 			return Cliente(
+				paciente["id"].get<int>(),
 				paciente["nombre"],
 				paciente["apellido"],
 				paciente["dni"],

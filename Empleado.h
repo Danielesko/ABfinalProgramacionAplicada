@@ -12,6 +12,9 @@ public:
 	Empleado(std::string nombre, std::string apellido, std::string dni, string tlf, std::string categoria)
 		: Persona(idAnterior++, nombre, apellido, dni, tlf), categoria(categoria) {
 	}
+	Empleado(int id, std::string nombre, std::string apellido, std::string dni, std::string tlf, std::string categoria)
+		: Persona(id, nombre, apellido, dni, tlf), categoria(categoria) {
+	}
 	static void guardarId() {
 		ofstream archivo("idEmpleado.json", std::ios::out);
 		if (archivo.is_open()) {

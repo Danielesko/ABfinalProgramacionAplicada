@@ -133,6 +133,7 @@ Empleado buscarEmpleadoDni(string dni) {
 	for (int i = 0; i < empleados.size(); i++) {
 		if (empleados[i].contains("dni") && empleados[i]["dni"] == dni) {
 			e = Empleado(
+				empleados[i]["id"].get<int>(), 
 				empleados[i]["nombre"].get<std::string>(),
 				empleados[i]["apellido"].get<std::string>(),
 				empleados[i]["dni"].get<std::string>(),

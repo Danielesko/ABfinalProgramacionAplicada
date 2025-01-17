@@ -1,5 +1,5 @@
 #include "ABfinalProgramacionAplicada.h"
-int Cita::idAnterior = 1;
+int Cita::idAnteriorCita = 1;
 vector<vector<string>> buscarCitas(string dniEmpleado) {
 	ifstream archivo;
 	json datos;
@@ -65,7 +65,7 @@ void escribirCita(json cita) {
 	}else {
 		cout << "No se pudo abrir el archivo para guardar." << endl;
 	}
-	Cita::guardarId();
+	Cita::guardarIdCita();
 }
 void crearCita() {
 	string dniPaciente = leerDni("Ingrese el DNI del paciente: ");

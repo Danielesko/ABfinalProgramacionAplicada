@@ -7,7 +7,7 @@ int main()
 {
 	Cliente::cargarId();
 	Empleado::cargarId();
-	Cita::cargarId();
+	Cita::guardarIdCita();
 	int num;
 	do {
 		cout << "Seleccione una opción" << endl;

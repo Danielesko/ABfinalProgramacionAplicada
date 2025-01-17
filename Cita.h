@@ -10,20 +10,20 @@ private:
 	int idEmpleado;
 	int idCliente;
 	std::string motivo;
-	static int idAnterior;
+	static int idAnteriorCita;
 public:
 	Cita() : id(0), hora(""), fecha(""), idEmpleado(0), idCliente(0), motivo("") {}
 	Cita(std::string hora, std::string fecha, int idEmpleado, int idCliente, std::string motivo)
-		: id(++idAnterior), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
+		: id(++idAnteriorCita), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
 	}
 	Cita(int id, std::string hora, std::string fecha, int idEmpleado, int idCliente, std::string motivo)
-		: id(++idAnterior), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
+		: id(++idAnteriorCita), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
 	}
-	static void guardarId() {
+	static void guardarIdCita() {
 		ofstream archivo("idCita.json", std::ios::out);
 		if (archivo.is_open()) {
 			json config;
-			config["idAnterior"] = idAnterior;
+			config["idAnteriorCita"] = idAnteriorCita;
 			archivo << config.dump(4);
 			archivo.close();
 		}
@@ -31,16 +31,13 @@ public:
 			std::cerr << "No se pudo guardar el idAnterior en el archivo." << std::endl;
 		}
 	}
-	static void cargarId() {
+	static void cargarIdCita() {
 		ifstream archivo("idCita.json", std::ios::in);
 		if (archivo.is_open()) {
 			json config;
 			archivo >> config;
-			idAnterior = config["idAnterior"];
+			idAnteriorCita = config["idAnteriorCita"];
 			archivo.close();
-		}
-		else {
-			std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
 		}
 	}
 	json to_json() const {
