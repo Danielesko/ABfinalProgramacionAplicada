@@ -61,3 +61,4 @@ bool coincidirCitas(string hora, string fecha, vector<vector<string>> citas);
 void escribirCita(json cita);
 void mostrarCitas();
 void buscarCitasPaciente(string nombre);
+void eliminarCita(string dni);

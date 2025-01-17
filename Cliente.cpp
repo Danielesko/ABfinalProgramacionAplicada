@@ -433,10 +433,6 @@ void eliminarPaciente(string dni) {
 		cout << "El paciente no existe, no se puede modificar." << endl;
 		return;
 	}
-	else {
-		cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
-
-	}
 	ifstream archivoLectura("clientes.json");
 	if (!archivoLectura.is_open()) {
 		cerr << "Error: No se pudo abrir el archivo de clientes." << endl;

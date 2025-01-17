@@ -131,9 +131,8 @@ void menuCitas() {
 			//menuModificarCita();
 			break;
 		case 5:
-			//mostrarCitas();
 			dni = leerDni("Ingrese el dni del paciente para eliminar: ");
-			//eliminarCita(dni);
+			eliminarCita(dni);
 			break;
 		case 0:
 			cout << "Saliendo del sistema de gestión de citas..." << endl;
@@ -165,6 +164,8 @@ string jsonToString(json clientesJson) {
 			frase += "Fecha: " + clientesJson[i]["fecha"].get<std::string>() + " Hora: " + clientesJson[i]["hora"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("motivo"))
 			frase += "Motivo: " + clientesJson[i]["motivo"].get<std::string>() + "\n";
+		if (clientesJson[i].contains("id"))
+			frase += "ID: " + to_string(clientesJson[i]["id"].get<int>()) + "\n";
 		frase += "\n";
 	}
 	return frase;

@@ -124,3 +124,55 @@ void buscarCitasPaciente(string dni) {
 		}
 	}
 }
+void eliminarCita(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() < 0) {
+		cout << "El paciente no existe, no se puede modificar." << endl;
+		return;
+	}
+	ifstream archivo("citas.json");
+	json citas;
+	if (archivo.is_open()) {
+		archivo >> citas;
+		archivo.close();
+		int contador = 0;
+		for (int i = 0; i < citas.size(); i++) {
+			if (citas[i].contains("idCliente") && citas[i]["idCliente"] == c.getId()) {
+				contador++;
+				cout << "ID: " << citas[i]["id"].get<int>() << " Fecha: " << citas[i]["fecha"].get<std::string>() << " Hora: " << citas[i]["hora"].get<std::string>() << " Motivo: " << citas[i]["motivo"].get<std::string>() << endl;
+			}
+		}
+		if (contador == 0) {
+			cout << "No se encontraron citas para el paciente." << endl;
+			return;
+		}
+	}else {
+		cout << "No se pudo abrir el archivo para leer." << endl;
+		return;
+	}
+	int idEliminar;
+	cout << "¿Qué cita desea eliminar? Añade su ID: ";
+	cin >> idEliminar;
+	ifstream archivoLectura("citas.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de citas." << endl;
+		return;
+	}
+	json citasActualizadas;
+	archivoLectura >> citas;
+	archivoLectura.close();
+	for (int i = 0; i < citas.size(); i++) {
+		if (citas[i].contains("id") && citas[i]["id"] != idEliminar) {
+			citasActualizadas.push_back(citas[i]);
+		}
+	}
+	ofstream archivoEscribir("citas.json");
+	if (!archivoEscribir.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de citas." << endl;
+		return;
+	}else {
+		archivoEscribir << citasActualizadas.dump(4);
+		archivoEscribir.close();
+		cout << "Cita eliminada exitosamente." << endl;
+	}
+}
