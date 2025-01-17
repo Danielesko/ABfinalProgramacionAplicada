@@ -14,35 +14,35 @@ vector<vector<string>> buscarCitas(string dniEmpleado) {
 			archivo.close();
 			return citas;
 		}
-		if (datos.size() == 0) {
-			cout << "No hay citas registradas." << endl;
-		}
-		else if (datos.is_array()) {
+		if (datos.is_array()) {
 			for (int i = 0; i < datos.size(); i++) {
-				if (datos[i].contains("idEmpleado") && datos[i]["idEmpleado"] == dniEmpleado) {
-					vector<string> cita;
+				cout << "hola1";
+				cout << datos.size();
+				vector<string> cita;
+				if (datos[i].contains("fecha") && datos[i].contains("hora")) {
+					cout << "Fecha: " << datos[i]["fecha"] << " Hora: " << datos[i]["hora"] << endl;
 					cita.push_back(datos[i]["fecha"].get<std::string>());
 					cita.push_back(datos[i]["hora"].get<std::string>());
 					citas.push_back(cita);
-
 				}
+				
 			}
 		}
+		archivo.close();
 	}
+	cout << "Número de citas encontradas: " << citas.size() << endl;
 	return citas;
 }
-bool coincidirCitas(string hora,string fecha, vector<vector<string>> citas) {
-	bool coincide = false;
-	if (citas.size() == 0) {
-		return coincide;
-	}
-	for (int i = 0; i < citas.size(); i++) {
-		if (citas[i][0] == fecha && citas[i][1] == hora) {
-			coincide = true;
-			break;
+bool coincidirCitas(string hora, string fecha, vector<vector<string>> citas) {
+	cout << "Tamaño de citas: " << citas.size() << endl;  // Verifica si hay elementos en citas
+	for (const auto& cita : citas) {
+		cout << cita[0] << " " << cita[1] << endl;
+		cout << "hola2";
+		if (cita[0] == fecha && cita[1] == hora) {
+			return true; 
 		}
 	}
-	return coincide;
+	return false; 
 }
 void escribirCita(json cita) {
 	json citasExistentes;
@@ -75,14 +75,14 @@ void crearCita() {
 	string motivo = leerCadenaNoVacia("Ingrese el motivo de la cita: ");
 	Cliente c = buscarPacienteDni(dniPaciente);
 	Empleado e = buscarEmpleadoDni(dniEmpleado);
-	if (c.getId() != 0 && e.getId() !=0) {
-		vector <vector<string>> citas = buscarCitas(dniEmpleado);
+	if (c.getId() != 0 && e.getId() != 0) {
+		vector<vector<string>> citas = buscarCitas(dniEmpleado);
 		bool coincide = coincidirCitas(hora, fecha, citas);
-		if (coincide == true) {
+		if (coincide) {
 			cout << "El empleado ya tiene una cita a esa hora y fecha." << endl;
 			return;
 		}else {
-			Cita cita = Cita(hora, fecha, e.getId(), c.getId(), motivo);
+			Cita cita(hora, fecha, e.getId(), c.getId(), motivo);
 			escribirCita(cita.to_json());
 		}
 	}
