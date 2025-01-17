@@ -14,7 +14,7 @@ add_executable(ABfinalProgramacionAplicada
     Quejas.cpp
     Funciones.h
     Funciones.cpp
-)
+ "Cita.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ABfinalProgramacionAplicada PROPERTY CXX_STANDARD 20)
