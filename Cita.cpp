@@ -84,7 +84,6 @@ void crearCita() {
 	}
 	else {
 		Cita cita = Cita(0, hora, fecha, e.getId(), c.getId(), motivo);
+		escribirCita(cita.to_json());
 	}
-
-
 }

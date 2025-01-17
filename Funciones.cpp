@@ -105,6 +105,45 @@ void menuEmpleados() {
 void menuQuejas() {
 }
 void menuCitas() {
+	int num;
+	do {
+		cout << "1. Ingresar una nueva cita" << endl;
+		cout << "2. Mostrar todas las citas" << endl;
+		cout << "3. Buscar una cita" << endl;
+		cout << "4. Modificar una cita" << endl;
+		cout << "5. Eliminar una cita" << endl;
+		cout << "0. Salir" << endl;
+		num = leerOpcion();
+		string dni;
+		Cita cita = Cita();
+		string nombre;
+		switch (num) {
+		case 1:
+			crearCita();
+			break;
+		case 2:
+			//mostrarCitas();
+			break;
+		case 3:
+			nombre = leerNombreApellido("Ingrese el nombre del paciente: ");
+			//buscarCita(nombre);
+			break;
+		case 4:
+			//menuModificarCita();
+			break;
+		case 5:
+			//mostrarCitas();
+			dni = leerDni("Ingrese el dni del paciente para eliminar: ");
+			//eliminarCita(dni);
+			break;
+		case 0:
+			cout << "Saliendo del sistema de gestión de citas..." << endl;
+			break;
+		default:
+			cout << "Opción no válida. Intente nuevamente." << endl;
+			break;
+		}
+	} while (num != 0);
 }
 string jsonToString(json clientesJson) {
 	string frase = "";
