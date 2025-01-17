@@ -16,9 +16,6 @@ public:
 	Cita(std::string hora, std::string fecha, int idEmpleado, int idCliente, std::string motivo)
 		: id(++idAnteriorCita), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
 	}
-	Cita(int id, std::string hora, std::string fecha, int idEmpleado, int idCliente, std::string motivo)
-		: id(++idAnteriorCita), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
-	}
 	static void guardarIdCita() {
 		ofstream archivo("idCita.json", std::ios::out);
 		if (archivo.is_open()) {
