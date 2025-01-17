@@ -298,6 +298,67 @@ void modificarCitaHora(string dni) {
 		cerr << "No se pudo abrir el archivo para guardar los cambios." << endl;
 	}
 }
+void modificarCitaMotivo(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() < 0) {
+		cout << "El paciente no existe, no se puede modificar." << endl;
+		return;
+	}
+	ifstream archivo("citas.json");
+	json citas;
+	if (archivo.is_open()) {
+		archivo >> citas;
+		archivo.close();
+		int contador = 0;
+		for (int i = 0; i < citas.size(); i++) {
+			if (citas[i].contains("idCliente") && citas[i]["idCliente"] == c.getId()) {
+				contador++;
+				cout << "ID: " << citas[i]["id"].get<int>() << " Fecha: " << citas[i]["fecha"].get<std::string>() << " Hora: " << citas[i]["hora"].get<std::string>() << " Motivo: " << citas[i]["motivo"].get<std::string>() << endl;
+			}
+		}
+		if (contador == 0) {
+			cout << "No se encontraron citas para el paciente." << endl;
+			return;
+		}
+	}else {
+		cout << "No se pudo abrir el archivo para leer." << endl;
+		return;
+	}
+	int idModificar;
+	cout << "¿Qué cita desea modificar? Añade su ID: ";
+	cin >> idModificar;
+	string nuevoMotivo;
+	do {
+		cout << "Ingrese el nuevo motivo de la cita: ";
+		cin.ignore();
+		getline(cin, nuevoMotivo);
+		if (nuevoMotivo.empty()) {
+			cout << "El motivo no puede estar vacío. Por favor ingrese un motivo válido." << endl;
+		}
+	} while (nuevoMotivo.empty());
+	ifstream archivoLectura("citas.json");
+	if (!archivoLectura.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de citas." << endl;
+		return;
+	}
+	json citasActualizadas;
+	archivoLectura >> citas;
+	archivoLectura.close();
+	for (int i = 0; i < citas.size(); i++) {
+		if (citas[i].contains("id") && citas[i]["id"] == idModificar) {
+			citas[i]["motivo"] = nuevoMotivo;
+		}
+		citasActualizadas.push_back(citas[i]);
+	}
+	ofstream archivoEscritura("citas.json");
+	if (archivoEscritura.is_open()) {
+		archivoEscritura << citasActualizadas.dump(4);
+		archivoEscritura.close();
+		cout << "La cita ha sido modificada exitosamente." << endl;
+	}else {
+		cerr << "No se pudo abrir el archivo para guardar los cambios." << endl;
+	}
+}
 void menuModificarCita() {
 	cout << "1.Modificar fecha" << endl;
 	cout << "2.Modificar hora" << endl;
@@ -314,7 +375,7 @@ void menuModificarCita() {
 		modificarCitaHora(dni);
 		break;
 	case 3:
-		//modificarCitaMotivo(dni);
+		modificarCitaMotivo(dni);
 		break;
 	case 0:
 		cout << "Saliendo del menú de modificación de citas..." << endl;

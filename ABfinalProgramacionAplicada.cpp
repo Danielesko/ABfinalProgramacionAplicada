@@ -13,8 +13,7 @@ int main()
 		cout << "Seleccione una opción" << endl;
 		cout << "1 Pacientes" << endl;
 		cout << "2 Empleados" << endl;
-		cout << "3 Quejas" << endl;
-		cout << "4 Citas" << endl;
+		cout << "3 Citas" << endl;
 		cout << "0. Salir" << endl;
 		cin >> num;
 		switch (num)
@@ -26,9 +25,6 @@ int main()
 			menuEmpleados();
 			break;
 		case 3:
-			//menuQuejas();
-			break;
-		case 4:
 			menuCitas();
 			break;
 		case 0:
