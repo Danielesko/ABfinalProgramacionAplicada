@@ -194,3 +194,15 @@ string leerTlf(const string& mensaje) {
 	}
 	return entrada;
 }
+string leerHora(const string& mensaje) {
+	string entrada;
+	regex horaRegex("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+	while (true) {
+		entrada = leerCadenaNoVacia(mensaje);
+		if (regex_match(entrada, horaRegex)) {
+			break;
+		}
+		cout << "La hora debe estar en el formato hh:mm. Intente nuevamente: ";
+	}
+	return entrada;
+}

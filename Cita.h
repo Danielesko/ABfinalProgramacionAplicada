@@ -40,4 +40,21 @@ public:
 			std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
 		}
 	}
+	json to_json() const {
+		return json{
+			{"id", id},
+			{"hora", hora},
+			{"fecha", fecha},
+			{"idEmpleado", idEmpleado},
+			{"idCliente", idCliente},
+			{"motivo", motivo}
+		};
+	}
+	int getId() const { return id; }
+	std::string getHora() const { return hora; }
+	std::string getFecha() const { return fecha; }
+	int getIdEmpleado() const { return idEmpleado; }
+	int getIdCliente() const { return idCliente; }
+	std::string getMotivo() const { return motivo; }
+		
 };
