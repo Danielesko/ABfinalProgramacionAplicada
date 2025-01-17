@@ -122,7 +122,7 @@ void menuCitas() {
 			crearCita();
 			break;
 		case 2:
-			//mostrarCitas();
+			mostrarCitas();
 			break;
 		case 3:
 			nombre = leerNombreApellido("Ingrese el nombre del paciente: ");
@@ -162,6 +162,10 @@ string jsonToString(json clientesJson) {
 			frase += "Fecha de nacimiento: " + clientesJson[i]["fechaNac"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("categoria"))
 			frase += "Categoria: " + clientesJson[i]["categoria"].get<std::string>() + "\n";
+		if (clientesJson[i].contains("fecha") && clientesJson[i].contains("hora"))
+			frase += "Fecha: " + clientesJson[i]["fecha"].get<std::string>() + " Hora: " + clientesJson[i]["hora"].get<std::string>() + "\n";
+		if (clientesJson[i].contains("motivo"))
+			frase += "Motivo: " + clientesJson[i]["motivo"].get<std::string>() + "\n";
 		frase += "\n";
 	}
 	return frase;

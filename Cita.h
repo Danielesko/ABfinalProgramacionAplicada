@@ -59,3 +59,4 @@ void crearCita();
 vector <vector<string>> buscarCitas(string dniEmpleado);
 bool coincidirCitas(string hora, string fecha, vector<vector<string>> citas);
 void escribirCita(json cita);
+void mostrarCitas();

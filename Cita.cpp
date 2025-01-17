@@ -80,3 +80,28 @@ void crearCita() {
 		}
 	}
 }
+void mostrarCitas() {
+	ifstream archivo;
+	json datos;
+	archivo.open("citas.json");
+	if (archivo.is_open()) {
+		try {
+			archivo >> datos;
+		}
+		catch (const json::parse_error& e) {
+			cerr << "Error al leer el archivo JSON: " << e.what() << endl;
+			archivo.close();
+			return;
+		}
+		if (datos.size() == 0) {
+			cout << "No hay citas registradas." << endl;
+		}
+		else if (datos.is_array()) {
+			string citas = jsonToString(datos);
+			cout << citas;
+		}
+	}
+	else {
+		cout << "No se pudo abrir el archivo para leer." << endl;
+	}
+}
