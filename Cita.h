@@ -13,6 +13,9 @@ private:
 	static int idAnterior;
 public:
 	Cita() : id(0), hora(""), fecha(""), idEmpleado(0), idCliente(0), motivo("") {}
+	Cita(std::string hora, std::string fecha, int idEmpleado, int idCliente, std::string motivo)
+		: id(++idAnterior), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
+	}
 	Cita(int id, std::string hora, std::string fecha, int idEmpleado, int idCliente, std::string motivo)
 		: id(++idAnterior), hora(hora), fecha(fecha), idEmpleado(idEmpleado), idCliente(idCliente), motivo(motivo) {
 	}

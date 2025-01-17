@@ -29,13 +29,13 @@ vector<vector<string>> buscarCitas(string dniEmpleado) {
 			}
 		}
 	}
-	else {
-		cout << "No se pudo abrir el archivo para leer." << endl;
-	}
 	return citas;
 }
 bool coincidirCitas(string hora,string fecha, vector<vector<string>> citas) {
 	bool coincide = false;
+	if (citas.size() == 0) {
+		return coincide;
+	}
 	for (int i = 0; i < citas.size(); i++) {
 		if (citas[i][0] == fecha && citas[i][1] == hora) {
 			coincide = true;
@@ -77,13 +77,12 @@ void crearCita() {
 	Empleado e = buscarEmpleadoDni(dniEmpleado);
 	if (c.getId() != 0 && e.getId() !=0) {
 		vector <vector<string>> citas = buscarCitas(dniEmpleado);
-		bool sePuede = coincidirCitas(hora, fecha, citas);
-		if (sePuede = false) {
+		bool coincide = coincidirCitas(hora, fecha, citas);
+		if (coincide == true) {
 			cout << "El empleado ya tiene una cita a esa hora y fecha." << endl;
 			return;
-		}
-		else {
-			Cita cita = Cita(0, hora, fecha, e.getId(), c.getId(), motivo);
+		}else {
+			Cita cita = Cita(hora, fecha, e.getId(), c.getId(), motivo);
 			escribirCita(cita.to_json());
 		}
 	}
