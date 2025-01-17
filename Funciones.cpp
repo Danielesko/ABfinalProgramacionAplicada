@@ -116,7 +116,6 @@ void menuCitas() {
 		num = leerOpcion();
 		string dni;
 		Cita cita = Cita();
-		string nombre;
 		switch (num) {
 		case 1:
 			crearCita();
@@ -125,8 +124,8 @@ void menuCitas() {
 			mostrarCitas();
 			break;
 		case 3:
-			nombre = leerNombreApellido("Ingrese el nombre del paciente: ");
-			//buscarCita(nombre);
+			dni = leerDni("Ingrese el dni del paciente: ");
+			buscarCitasPaciente(dni);
 			break;
 		case 4:
 			//menuModificarCita();

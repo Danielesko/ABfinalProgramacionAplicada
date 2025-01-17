@@ -105,3 +105,22 @@ void mostrarCitas() {
 		cout << "No se pudo abrir el archivo para leer." << endl;
 	}
 }
+void buscarCitasPaciente(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	ifstream archivo("citas.json");
+	json citas;
+	if (archivo.is_open()) {
+		archivo >> citas;
+		archivo.close();
+		int contador = 0;
+		for (int i = 0; i < citas.size(); i++) {
+			if (citas[i].contains("idCliente") && citas[i]["idCliente"] == c.getId()) {
+				contador++;
+				cout << "Fecha: " << citas[i]["fecha"].get<std::string>() << " Hora: " << citas[i]["hora"].get<std::string>() << " Motivo: " << citas[i]["motivo"].get<std::string>() << endl;
+			}
+		}
+		if (contador == 0) {
+			cout << "No se encontraron citas para el paciente." << endl;
+		}
+	}
+}
