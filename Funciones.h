@@ -25,4 +25,5 @@ string leerFechaNac(const string& mensaje);
 string leerTlf(const string& mensaje);
 string leerNombreApellido(const string& mensaje);
 string leerHora(const string& mensaje);
+string leerHistorial(const string& mensaje);
 #endif 

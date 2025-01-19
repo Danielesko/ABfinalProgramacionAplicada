@@ -261,7 +261,20 @@ string leerHora(const string& mensaje) {
     }
     return entrada;
 }
-
+string leerHistorial(const string& mensaje) {
+	string entrada;
+    regex historialRegex("^[A-Za-z0-9 ]+$");
+	while (true) {
+        entrada = leerCadenaNoVacia(mensaje);
+		if (!entrada.empty()) {
+			if (regex_match(entrada, historialRegex)) {
+				break;
+			}
+		}
+		cout << "Entrada inválida.Si no tiene historial aun escribalo ya que no puede estar vacio,números y espacios. Intente nuevamente: ";
+	}
+	return entrada;
+}
 
 
 

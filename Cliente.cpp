@@ -36,7 +36,7 @@ void crearCliente() {
     string dni = leerDni("Ingrese el DNI del cliente: ");
     string tlf = leerTlf("Ingrese el teléfono del cliente: ");
     string fechaNac = leerFechaNac("Ingrese la fecha de nacimiento del cliente: ");
-    string historial = leerNombreApellido("Ingrese el historial del cliente: ");
+    string historial = leerHistorial("Ingrese el historial del cliente: ");
     Cliente cliente = Cliente(nombre, apellido, dni, tlf, fechaNac, historial);
     escribirClienteArchivo(cliente.to_json());
 }
@@ -175,7 +175,7 @@ void modificarPacienteHistorial(string dni) {
     else {
         cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
     }
-    string historialNuevo = leerCadenaNoVacia("Ingrese el nuevo historial: ");
+    string historialNuevo = leerHistorial("Ingrese el nuevo historial: ");
     Cliente clienteActualizado(
         c.getNombre(),
         c.getApellido(),
