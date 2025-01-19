@@ -120,9 +120,10 @@ void menuCitas() {
     do {
         cout << "1. Ingresar una nueva cita" << endl;
         cout << "2. Mostrar todas las citas" << endl;
-        cout << "3. Buscar una cita" << endl;
+        cout << "3. Buscar una citas de un paciente" << endl;
         cout << "4. Modificar una cita" << endl;
         cout << "5. Eliminar una cita" << endl;
+		cout << "6. Mostrar citas de un empleado" << endl;
         cout << "0. Salir" << endl;
         num = leerOpcion();
         string dni;
@@ -145,6 +146,10 @@ void menuCitas() {
             dni = leerDni("Ingrese el dni del paciente para eliminar: ");
             eliminarCita(dni);
             break;
+        case 6:
+            dni = leerDni("Ingrese el dni del empleado: ");
+            buscarCitaEmpleado(dni);
+			break;
         case 0:
             cout << "Saliendo del sistema de gestión de citas..." << endl;
             break;

@@ -63,3 +63,4 @@ void mostrarCitas();
 void buscarCitasPaciente(string nombre);
 void eliminarCita(string dni);
 void menuModificarCita();
+void buscarCitaEmpleado(string dni);

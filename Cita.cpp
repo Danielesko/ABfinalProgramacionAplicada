@@ -116,11 +116,30 @@ void buscarCitasPaciente(string dni) {
 		for (int i = 0; i < citas.size(); i++) {
 			if (citas[i].contains("idCliente") && citas[i]["idCliente"] == c.getId()) {
 				contador++;
-				cout << "Fecha: " << citas[i]["fecha"].get<std::string>() << " Hora: " << citas[i]["hora"].get<std::string>() << " Motivo: " << citas[i]["motivo"].get<std::string>() << endl;
-			}
+                cout << "Fecha: " << citas[i]["fecha"].get<std::string>() << " Hora: " << citas[i]["hora"].get<std::string>() << " Motivo: " << citas[i]["motivo"].get<std::string>() << " ID Empleado: " << citas[i]["idEmpleado"].get<int>() << endl;
+                }
 		}
 		if (contador == 0) {
 			cout << "No se encontraron citas para el paciente." << endl;
+		}
+	}
+}
+void buscarCitaEmpleado(string dni) {
+	Empleado e = buscarEmpleadoDni(dni);
+	ifstream archivo("citas.json");
+	json citas;
+	if (archivo.is_open()) {
+		archivo >> citas;
+		archivo.close();
+		int contador = 0;
+		for (int i = 0; i < citas.size(); i++) {
+			if (citas[i].contains("idEmpleado") && citas[i]["idEmpleado"] == e.getId()) {
+				contador++;
+                cout << "Fecha: " << citas[i]["fecha"].get<std::string>() << " Hora: " << citas[i]["hora"].get<std::string>() << " Motivo: " << citas[i]["motivo"].get<std::string>() << " ID Paciente: " << citas[i]["idCliente"].get<int>() << endl;
+                }
+		}
+		if (contador == 0) {
+			cout << "No se encontraron citas para el empleado." << endl;
 		}
 	}
 }
