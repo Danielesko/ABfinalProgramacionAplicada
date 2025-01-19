@@ -124,9 +124,13 @@ void menuCitas() {
         cout << "4. Modificar una cita" << endl;
         cout << "5. Eliminar una cita" << endl;
 		cout << "6. Mostrar citas de un empleado" << endl;
+		cout << "7. Guardar en un archivo las citas entre dos fechas" << endl;
         cout << "0. Salir" << endl;
         num = leerOpcion();
         string dni;
+        string fechaInicio;
+        string fechaFin;
+        string nombreArchivo;
         Cita cita = Cita();
         switch (num) {
         case 1:
@@ -150,6 +154,12 @@ void menuCitas() {
             dni = leerDni("Ingrese el dni del empleado: ");
             buscarCitaEmpleado(dni);
 			break;
+		case 7:
+            fechaInicio = leerFechaNac("Ingrese la fecha de inicio (YYYY-MM-DD): ");
+            fechaFin = leerFechaNac("Ingrese la fecha de fin (YYYY-MM-DD): ");
+            nombreArchivo = leerCadenaNoVacia("Ingrese el nombre del archivo de salida: ");
+            guardarCitasEntreFechas(fechaInicio,fechaFin,nombreArchivo);
+            break;
         case 0:
             cout << "Saliendo del sistema de gestión de citas..." << endl;
             break;

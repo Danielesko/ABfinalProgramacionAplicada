@@ -2,6 +2,7 @@
 #include "Persona.h"
 #include <string>      
 #include <nlohmann/json.hpp>  
+
 class Cita {
 private:
 	int id;
@@ -63,3 +64,4 @@ void buscarCitasPaciente(string nombre);
 void eliminarCita(string dni);
 void menuModificarCita();
 void buscarCitaEmpleado(string dni);
+void guardarCitasEntreFechas(const std::string& fechaInicio, const std::string& fechaFin, const std::string& nombreArchivo);

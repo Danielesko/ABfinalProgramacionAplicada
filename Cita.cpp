@@ -1,4 +1,7 @@
 #include "ABfinalProgramacionAplicada.h"
+#include <sstream>
+#include <iomanip>
+#include <ctime>
 int Cita::idAnteriorCita = 1;
 vector<vector<string>> buscarCitas(string dniEmpleado) {
 	ifstream archivo;
@@ -406,5 +409,42 @@ void menuModificarCita() {
 	default:
 		cout << "Opción no válida. Intente nuevamente." << endl;
 		break;
+	}
+}
+std::tm stringToTm(const std::string& fecha) {
+	std::tm tmFecha = {};
+	std::istringstream ss(fecha);
+	ss >> std::get_time(&tmFecha, "%d/%m/%Y");
+	return tmFecha;
+}
+void guardarCitasEntreFechas(const string& fechaInicio, const string& fechaFin, const string& nombreArchivo) {
+	cout << "hola" ;
+	ifstream archivo("citas.json");
+	json citas;
+	if (archivo.is_open()) {
+		archivo >> citas;
+		archivo.close();
+		ofstream archivoSalida(nombreArchivo);
+		if (!archivoSalida.is_open()) {
+			cerr << "Error: No se pudo abrir el archivo de salida." << endl;
+			return;
+		}
+		std::tm tmFechaInicio = stringToTm(fechaInicio);
+		std::tm tmFechaFin = stringToTm(fechaFin);
+		std::time_t timeFechaInicio = std::mktime(&tmFechaInicio);
+		std::time_t timeFechaFin = std::mktime(&tmFechaFin);
+
+		for (const auto& cita : citas) {
+			std::tm tmFechaCita = stringToTm(cita["fecha"].get<std::string>());
+			std::time_t timeFechaCita = std::mktime(&tmFechaCita);
+			if (timeFechaCita >= timeFechaInicio && timeFechaCita <= timeFechaFin) {
+				archivoSalida << "Fecha: " << cita["fecha"].get<std::string>() << ", Hora: " << cita["hora"].get<std::string>() << ", Motivo: " << cita["motivo"].get<std::string>() << ", ID Empleado: " << cita["idEmpleado"].get<int>() << ", ID Paciente: " << cita["idCliente"].get<int>() << endl;
+			}
+		}
+		archivoSalida.close();
+		cout << "Citas exportadas correctamente a " << nombreArchivo << endl;
+	}
+	else {
+		cerr << "Error: No se pudo abrir el archivo de citas." << endl;
 	}
 }
