@@ -382,3 +382,26 @@ void modificarEmpleadoCategoria(string dni) {
 	archivoEscritura.close();
 	cout << "Empleado modificado exitosamente." << endl;
 }
+void mostrarEmpleadosPorCategoria(string categoria) {
+	ifstream archivo("empleados.json");
+	if (!archivo.is_open()) {
+		cerr << "Error: No se pudo abrir el archivo de empleados." << endl;
+		return;
+	}
+	json empleados;
+	archivo >> empleados;
+	archivo.close();
+	json empleadosFiltrados;
+	for (int i = 0; i < empleados.size(); i++) {
+		if (empleados[i].contains("categoria") && empleados[i]["categoria"] == categoria) {
+			empleadosFiltrados.push_back(empleados[i]);
+		}
+	}
+	if (empleadosFiltrados.size() == 0) {
+		cout << "No se encontraron empleados con esa categoría." << endl;
+	}
+	else {
+		string empleadosString = jsonToString(empleadosFiltrados);
+		cout << empleadosString;
+	}
+}

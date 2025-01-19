@@ -76,6 +76,7 @@ void menuEmpleados() {
         cout << "3. Buscar un empleado" << endl;
         cout << "4. Modificar un empleado" << endl;
         cout << "5. Eliminar un empleado" << endl;
+		cout << "6. Mostrar empleados por categoria" << endl;
         cout << "0. Salir" << endl;
         num = leerOpcion();
         string dni;
@@ -99,6 +100,10 @@ void menuEmpleados() {
             mostrarEmpleados();
             dni = leerDni("Ingrese el dni del empleado para eliminar: ");
             eliminarEmpleado(dni);
+            break;
+        case 6:
+            nombre = leerCategoria("¿Por que categoria quieres buscar? medico o enfermero : " );
+            mostrarEmpleadosPorCategoria(nombre);
             break;
         case 0:
             cout << "Saliendo del sistema de gestión de empleados..." << endl;
