@@ -280,6 +280,21 @@ string leerHistorial(const string& mensaje) {
 	}
 	return entrada;
 }
+string leerCategoria(const string& mensaje) {
+    string entrada;
+    while (true) {
+        cout << mensaje; 
+        entrada = leerCadenaNoVacia(""); 
+        transform(entrada.begin(), entrada.end(), entrada.begin(), ::tolower); 
+
+        if (entrada == "enfermero" || entrada == "medico") {
+            break; 
+        }
+        cout << "La categoría debe ser 'enfermero' o 'medico'. Intente nuevamente." << endl;
+    }
+    return entrada;
+}
+
 
 
 

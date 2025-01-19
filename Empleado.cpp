@@ -6,10 +6,12 @@ void crearEmpleado() {
 	string apellido = leerNombreApellido("Ingrese el apellido del empleado: ");
 	string dni = leerDni("Ingrese el DNI del empleado: ");
 	string tlf = leerTlf("Ingrese el teléfono del empleado: ");
-	string categoria = leerCadenaNoVacia("Ingrese la categoría del empleado: ");
+	string categoria = leerCategoria("Seleccione una categoría de empleado (Opciones: enfermero, medico): ");
 	Empleado empleado = Empleado(nombre, apellido, dni, tlf, categoria);
 	escribirEmpleadoArchivo(empleado.to_json());
+	cout << "Empleado creado exitosamente." << endl;
 }
+
 void escribirEmpleadoArchivo(json empleado) {
 	json empleadosExistentes;
 	ifstream archivoLeer("empleados.json", ios::in | ios::binary);

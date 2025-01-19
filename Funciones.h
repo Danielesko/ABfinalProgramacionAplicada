@@ -12,7 +12,6 @@ using namespace std;
 
 void menuPacientes();
 void menuEmpleados();
-void menuQuejas();
 void menuCitas();
 
 string jsonToString(json clientesJson);
@@ -26,4 +25,5 @@ string leerTlf(const string& mensaje);
 string leerNombreApellido(const string& mensaje);
 string leerHora(const string& mensaje);
 string leerHistorial(const string& mensaje);
+string leerCategoria(const string& mensaje);
 #endif 
