@@ -5,22 +5,23 @@
 #include "Persona.h" 
 #include <string>      
 #include <nlohmann/json.hpp>  
-using json = nlohmann::json;  
+using json = nlohmann::json;
 
 
 class Cliente : public Persona {
 private:
     static int idAnterior;
     std::string fechaNac;
-    std::string localidad;
+    std::string historial;
 
 public:
-    Cliente() : Persona(0, "", "", "", ""), fechaNac(""), localidad("") {}
+    Cliente() : Persona(0, "", "", "", ""), fechaNac(""), historial("") {}
 
-    Cliente(std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string localidad)
-        : Persona(idAnterior++, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {}
-    Cliente(int id, std::string nombre, std::string apellido, std::string dni, std::string tlf, std::string fechaNac, std::string localidad)
-        : Persona(id, nombre, apellido, dni, tlf), fechaNac(fechaNac), localidad(localidad) {
+    Cliente(std::string nombre, std::string apellido, std::string dni, string tlf, std::string fechaNac, std::string historial)
+        : Persona(idAnterior++, nombre, apellido, dni, tlf), fechaNac(fechaNac), historial(historial) {
+    }
+    Cliente(int id, std::string nombre, std::string apellido, std::string dni, std::string tlf, std::string fechaNac, std::string historial)
+        : Persona(id, nombre, apellido, dni, tlf), fechaNac(fechaNac), historial(historial) {
     }
     static void guardarId() {
         ofstream archivo("id.json", std::ios::out);
@@ -35,18 +36,18 @@ public:
         }
     }
 
-	static void cargarId() {
-		ifstream archivo("id.json", std::ios::in);
-		if (archivo.is_open()) {
-			json config;
-			archivo >> config;
-			idAnterior = config["idAnterior"];
-			archivo.close();
-		}
-		else {
-			std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
-		}
-	}
+    static void cargarId() {
+        ifstream archivo("id.json", std::ios::in);
+        if (archivo.is_open()) {
+            json config;
+            archivo >> config;
+            idAnterior = config["idAnterior"];
+            archivo.close();
+        }
+        else {
+            std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
+        }
+    }
 
 
     json to_json() const {
@@ -57,15 +58,15 @@ public:
             {"dni", getDni()},
             {"telefono", getTlf()},
             {"fechaNac", fechaNac},
-            {"localidad", localidad}
+            {"historial", historial}
         };
     }
-    static int getIdAnterior() {return idAnterior;}
+    static int getIdAnterior() { return idAnterior; }
     std::string getFechaNac() const { return fechaNac; }
-    std::string getLocalidad() const { return localidad; }
+    std::string getHistorial() const { return historial; }
 
     void setFechaNac(const std::string& fecha) { fechaNac = fecha; }
-    void setLocalidad(const std::string& loc) { localidad = loc; }
+    void setHistorial(const std::string& hist) { historial = hist; }
 };
 
 void escribirClienteArchivo(json cliente);
@@ -80,5 +81,11 @@ void mofificarPacienteNombre(string dni);
 void modificarPacienteApellido(string dni);
 void modificarPacienteTlf(string dni);
 void mofificarPacienteFechaNac(string dni);
-void modificarPacienteLocalidad(string dni);
+void modificarPacienteHistorial(string dni);
 #endif  
+
+
+
+
+
+
