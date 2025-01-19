@@ -175,38 +175,45 @@ void modificarPacienteHistorial(string dni) {
     else {
         cout << "Paciente encontrado. Ingrese los nuevos datos." << endl;
     }
+
     string historialNuevo = leerHistorial("Ingrese el nuevo historial: ");
-    Cliente clienteActualizado(
-        c.getNombre(),
-        c.getApellido(),
-        c.getDni(),
-        c.getTlf(),
-        c.getFechaNac(),
-        historialNuevo
-    );
     ifstream archivoLectura("clientes.json");
     if (!archivoLectura.is_open()) {
         cerr << "Error: No se pudo abrir el archivo de clientes." << endl;
         return;
     }
+
     json pacientes;
     archivoLectura >> pacientes;
     archivoLectura.close();
+    bool encontrado = false;
     for (auto& paciente : pacientes) {
         if (paciente.contains("dni") && paciente["dni"] == dni) {
-            paciente = clienteActualizado.to_json();
+            if (paciente.contains("historial")) {
+                paciente["historial"] = paciente["historial"].get<std::string>() + "\n" + historialNuevo;
+            }
+            else {
+                paciente["historial"] = historialNuevo;
+            }
+            encontrado = true;
             break;
         }
+    }
+    if (!encontrado) {
+        cout << "El paciente no fue encontrado en el archivo JSON." << endl;
+        return;
     }
     ofstream archivoEscritura("clientes.json");
     if (!archivoEscritura.is_open()) {
         cerr << "Error: No se pudo escribir en el archivo de clientes." << endl;
         return;
     }
-    archivoEscritura << pacientes.dump(4);
+    archivoEscritura << pacientes.dump(4); 
     archivoEscritura.close();
-    cout << "Paciente modificado exitosamente." << endl;
+    cout << "Historial del paciente modificado exitosamente." << endl;
 }
+
+
 
 void mofificarPacienteFechaNac(string dni) {
     Cliente c = buscarPacienteDni(dni);
