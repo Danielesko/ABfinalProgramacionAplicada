@@ -149,7 +149,7 @@ string jsonToString(json clientesJson) {
 		if (clientesJson[i].contains("apellido"))
 			frase += "Apellido: " + clientesJson[i]["apellido"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("dni"))
-			frase += "DNI: " + clientesJson[i]["dni"].get<std::string>() + "\n";
+			frase += "DNI: " + clientesJson[i]["dni"].get<std::string>() + "\n"; 
 		if (clientesJson[i].contains("telefono"))
 			frase += "Telefono: " + clientesJson[i]["telefono"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("localidad"))
@@ -164,6 +164,10 @@ string jsonToString(json clientesJson) {
 			frase += "Motivo: " + clientesJson[i]["motivo"].get<std::string>() + "\n";
 		if (clientesJson[i].contains("id"))
 			frase += "ID: " + to_string(clientesJson[i]["id"].get<int>()) + "\n";
+		if (clientesJson[i].contains("idEmpleado"))
+			frase += "Id Empleado: " + to_string(clientesJson[i]["idEmpleado"].get<int>()) + "\n";
+		if (clientesJson[i].contains("idCliente"))
+			frase += "Id Paciente: " + to_string(clientesJson[i]["idCliente"].get<int>()) + "\n";
 		frase += "\n";
 	}
 	return frase;
