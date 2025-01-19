@@ -45,7 +45,6 @@ public:
             archivo.close();
         }
         else {
-            std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
         }
     }
 

@@ -24,7 +24,6 @@ public:
 			archivo.close();
 		}
 		else {
-			std::cerr << "No se pudo guardar el idAnterior en el archivo." << std::endl;
 		}
 	}
 	static void cargarId() {
@@ -36,7 +35,6 @@ public:
 			archivo.close();
 		}
 		else {
-			std::cerr << "No se pudo cargar el idAnterior del archivo." << std::endl;
 		}
 	}
 	json to_json() const {

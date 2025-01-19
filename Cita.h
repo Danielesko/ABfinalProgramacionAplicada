@@ -25,7 +25,6 @@ public:
 			archivo.close();
 		}
 		else {
-			std::cerr << "No se pudo guardar el idAnterior en el archivo." << std::endl;
 		}
 	}
 	static void cargarIdCita() {
