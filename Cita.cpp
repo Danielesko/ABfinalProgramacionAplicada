@@ -97,6 +97,10 @@ void mostrarCitas() {
 			cout << "No hay citas registradas." << endl;
 		}
 		else if (datos.is_array()) {
+			std::sort(datos.begin(), datos.end(), [](const json& a, const json& b) {
+				return a["fecha"].get<std::string>() > b["fecha"].get<std::string>();
+				});
+
 			string citas = jsonToString(datos);
 			cout << citas;
 		}
