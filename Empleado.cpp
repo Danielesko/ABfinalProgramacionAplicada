@@ -351,7 +351,7 @@ void modificarEmpleadoCategoria(string dni) {
 	else {
 		cout << "Empleado encontrado. Ingrese los nuevos datos." << endl;
 	}
-	string categoriaNueva = leerCadenaNoVacia("Ingrese la nueva categoría: ");
+	string categoriaNueva = leerCategoria("Ingrese la nueva categoría: enfermero o medico");
 	Empleado empleadoActualizado(
 		e.getNombre(),
 		e.getApellido(),
