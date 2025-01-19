@@ -28,6 +28,7 @@ void menuPacientes() {
         cout << "3. Buscar un paciente" << endl;
         cout << "4. Modificar un paciente" << endl;
         cout << "5. Eliminar un paciente" << endl;
+		cout << "6. Mostrar historial de un paciente" << endl;
         cout << "0. Salir" << endl;
 
         num = leerOpcion();
@@ -53,6 +54,10 @@ void menuPacientes() {
             dni = leerDni("Ingrese el dni del paciente para eliminar: ");
             eliminarPaciente(dni);
             break;
+        case 6:
+			dni = leerDni("Ingrese el dni del paciente para mostrar su historial: ");
+            mostrarHistorialPaciente(dni);
+			break;
         case 0:
             cout << "Saliendo del sistema de gestión de pacientes..." << endl;
             break;

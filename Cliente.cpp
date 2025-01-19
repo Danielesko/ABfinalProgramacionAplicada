@@ -465,7 +465,29 @@ void eliminarPaciente(string dni) {
         cout << "Paciente eliminado exitosamente." << endl;
     }
 }
-
+void mostrarHistorialPaciente(string dni) {
+	Cliente c = buscarPacienteDni(dni);
+	if (c.getId() < 0) {
+		cout << "El paciente no existe, no se puede mostrar el historial." << endl;
+		return;
+	}
+	ifstream archivo("clientes.json");
+	json pacientes;
+	if (archivo.is_open()) {
+		archivo >> pacientes;
+		archivo.close();
+		int contador = 0;
+		for (int i = 0; i < pacientes.size(); i++) {
+			if (pacientes[i].contains("dni") && pacientes[i]["dni"] == dni) {
+				contador++;
+				cout << "Historial: " << pacientes[i]["historial"].get<std::string>() << endl;
+			}
+		}
+		if (contador == 0) {
+			cout << "No se encontró historial para el paciente." << endl;
+		}
+	}
+}
 
 
 

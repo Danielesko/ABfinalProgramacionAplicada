@@ -82,6 +82,7 @@ void modificarPacienteApellido(string dni);
 void modificarPacienteTlf(string dni);
 void mofificarPacienteFechaNac(string dni);
 void modificarPacienteHistorial(string dni);
+void mostrarHistorialPaciente(string dni);
 #endif  
 
 
